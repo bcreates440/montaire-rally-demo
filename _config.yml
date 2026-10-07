@@ -12,8 +12,8 @@ baseurl: "/montaire-rally-demo"
 asset_base: "/assets/rally"
 
 # --- Ticketing / registration (Stride Events) -------------------------------
-# Replace with the real event URL once the Stride event is created.
-stride_event_url: "https://demo.strideevents.com/"
+# Stride event page (swap for the registration page URL when it exists).
+stride_event_url: "https://www.strideevents.com/events/montaire-rally/2027/tickets"
 stride_button_label: "Register on Stride"
 
 # --- Links carried over from the current site -------------------------------
