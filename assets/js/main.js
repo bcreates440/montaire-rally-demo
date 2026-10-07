@@ -36,36 +36,4 @@
       });
     });
   }
-
-  // Register page: order builder -> hands off to Stride
-  var list = document.getElementById('opts');
-  if (list) {
-    var state = {};
-    var money = function (n) { return '$' + n.toLocaleString('en-US'); };
-    var sum = document.getElementById('sum-list'), tot = document.getElementById('sum-total'), go = document.getElementById('go');
-    function render() {
-      var rows = '', total = 0, count = 0;
-      list.querySelectorAll('.opt').forEach(function (o) {
-        var id = o.getAttribute('data-id'), price = +o.getAttribute('data-price'), name = o.getAttribute('data-name');
-        var q = state[id] || 0;
-        o.classList.toggle('on', q > 0);
-        o.querySelector('output').textContent = q;
-        if (q) { rows += '<li><span>' + q + ' × ' + name + '</span><span>' + money(q * price) + '</span></li>'; total += q * price; count += q; }
-      });
-      sum.innerHTML = rows || '<li class="empty"><span>Nothing selected yet</span></li>';
-      tot.textContent = money(total);
-      go.setAttribute('aria-disabled', count ? 'false' : 'true');
-      go.style.opacity = count ? '1' : '.5';
-      go.style.pointerEvents = count ? 'auto' : 'none';
-      go.tabIndex = count ? 0 : -1;
-    }
-    go.addEventListener('click', function (e) { if (go.getAttribute('aria-disabled') === 'true') e.preventDefault(); });
-    list.addEventListener('click', function (e) {
-      var b = e.target.closest('button[data-d]'); if (!b) return;
-      var o = b.closest('.opt'), id = o.getAttribute('data-id');
-      state[id] = Math.max(0, Math.min(20, (state[id] || 0) + (+b.getAttribute('data-d'))));
-      render();
-    });
-    render();
-  }
 })();

@@ -11,8 +11,6 @@ https://bcreates440.github.io/montaire-rally-demo/ (demo; marked noindex).
 ## What's in the demo
 - **Home** – hero video, philosophy, route map + three day cards, the four vehicle
   classes, schedule (April 22–24, 2027), lodging, Coin Quest, gear, partners, FAQ.
-- **/register/** – pick passes and quantities; the order summary hands off to the
-  Stride event page (waiver, promo codes, gift certificates, payment live there).
 - **/gallery/** – every image from the old site, filterable, with a lightbox.
 - **/admin/** – Decap CMS for passes, schedule, FAQ, and the Stride link.
 - Every distinct image and all three videos from the old site are used (58 files after
@@ -22,9 +20,10 @@ https://bcreates440.github.io/montaire-rally-demo/ (demo; marked noindex).
   wherever it displays small.
 
 ## Before it goes live
-1. Create the event in Stride and paste its URL into `stride_event_url` in `_config.yml`.
-2. Replace the placeholder prices in `_data/passes.yml` (they only drive the
-   on-page estimate; Stride is the source of truth).
+1. Every Register button uses `stride_event_url` in `_config.yml` (the Stride event
+   page now; swap in the registration page URL when it exists).
+2. Replace the placeholder prices in `_data/passes.yml` (shown on the home page
+   pass cards; Stride is the source of truth).
 3. In `_config.yml` set `url:` to his domain and `baseurl: ""`, and remove the
    `noindex` meta tag from `_layouts/default.html`.
 4. Push to a new GitHub repo, enable Pages, and fill in `admin/config.yml`
