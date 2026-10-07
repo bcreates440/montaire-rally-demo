@@ -1,0 +1,75 @@
+# Every image and video found on montairerally.com, grouped by use.
+# Paths are relative to site.asset_base. Where the original had several sizes,
+# the largest is listed (plus a "_sm" version for fast-loading thumbnails).
+
+# --- Brand ------------------------------------------------------------------
+og_image:        images/b3c3972323531c6b9d22d38941ff28d5.jpg
+favicon:         images/6668cf92581af36ac6fd3ab59242437e.png
+icon_192:        images/e0ebf211397723e7401c922bc770bd51.png
+apple_touch:     images/1651745975f8bbe9c42f279c4c6164e9.png
+logo:            media/741a3949110ade4c0b42c698d2a747e9.webp
+logo_hires:      media/3041bec772216027811e98ca6387d272.webp
+poster_schedule_sm: media/525483acd2edaf310c079512e3c38168.jpg
+
+# --- Hero video + stills ----------------------------------------------------
+hero_video:      video/607f52e19e3cab668898eb39854e1b29.mp4
+hero_video_sm:   video/cd84b093cf034b4fd47259a773787da4.mp4
+hero_poster:     video/c152e76ca93c18b0548deb6948ebbb74.jpg
+strip_1:         video/739862d5c7aa38fd2828782ab5897116.jpg
+route_video:     video/c1e93066e9c04bb1f6d7bdc9a7c009d9.mp4
+route_video_sm:  video/3bc4cb22b9f33e5fda878554b19c1a30.mp4
+route_poster:    video/eb2640dc63876e47691042a772b9a32e.jpg
+strip_2:         video/8679ed4130b14884855f02809755e657.jpg
+coin_video:      video/86d9d3be8e11a20b14526e5e5511d486.mp4
+coin_video_sm:   video/857a1f0479564289d2074ed28b2c13b7.mp4
+coin_poster:     video/c37282fe6976a4f650ef229fa7b6f91f.jpg
+strip_3:         video/f953227d163ee83486adb0b0bd89b4db.jpg
+
+# --- Original posters (kept as "view the original" links + gallery) ---------
+poster_schedule:   media/d7804b3aa12f57786208444de255893d.jpg
+poster_vehicles:   media/2ecc000b30416634943567dad7999277.jpg
+poster_coinquest:  media/481f9a1dfe361ae4795ded870b2a6aa6.jpg
+poster_route_text: media/97bb7d2b081c1bf740225079382e2ac5.jpg
+poster_philosophy: media/8178a1494c42a9860b0eeb65ef91f09a.jpg
+route_map:         media/67d1fab7606eb417cc83408ed4cab2a3.jpg
+
+# --- Pass artwork (lanyard badges) -------------------------------------------
+pass_entry:    media/95e886d6f9cf4a9ab465e9a472e1375a.webp
+pass_single:   media/be4a519de4ceeac05bcb49c75c73f56c.jpg
+pass_lodging:  media/2a8cf3165d395ae448c7446dabc9530f.jpg
+pass_lunch:    media/93f48e2294c1eff8a314d6772370ea17.webp
+pass_apparel:  media/1240d3b8615eb7636ff245ccd20ecbe4.jpg
+pass_coin:     media/92b01c8dd7fa855f2049e072c70864e1.jpg
+
+# --- Photography -------------------------------------------------------------
+lodging_aerial:    media/70eb10d5de5602fd84a55159614ce55e.jpg
+viaduct_convoy:    media/c7f133b0ac3270dfc5f4d4460f9f894e.jpg
+driver_red_suit:   media/520051b95786f4c20b9c4312a7fa03d1.jpg
+couple_beach:      media/be33008529a7deff49ada5cc37b7ad6a.jpg
+couple_beach_xl:   media/913fe150303296a122d5a72f95b2ee93.jpg
+man_jaguar:        media/83de19898869bcb47ccd7d7c2411608a.jpg
+man_convertible:   media/1c1275b2fca538961c498d5a490d8140.jpg
+man_firepit:       media/e9f15d012c0bacaadcb5cbd23d107406.jpg
+woman_defender:    media/e54861c9f50ae2e5ccec57fa27b43d46.jpg
+woman_lexus:       media/c85ef9f5649f58f98d38fc73bba8d847.jpg
+man_classic:       media/a739dd66ea70103d7097e2ba031fd47e.jpg
+man_peace_sign:    media/fb56fcfed3f78a9f9863c6dbf1ff7cd4.jpg
+pair_porsche_dam:  media/80aa6b7ca55ece685c70f101595124ea.jpg
+man_tumbler:       media/edc4ac64c7ea5b7dde557dcad64a915d.jpg
+
+# --- Gear ---------------------------------------------------------------------
+gear_windshield:   media/505294ba85e4b7554cefe75ced7d01f4.jpg
+gear_roundel:      media/932f758ed1cbfd407a05e3554a53487c.jpg
+gear_plaque:       media/ca67e0d5a8609fcf72aa4e074e4879db.jpg
+gear_polaroid:     media/e574a24f0e5683305e9e9f6d3385455e.jpg
+gear_door_plate:   media/e2e0fbf7143fedbc8afd8f7c7d81bca5.jpg
+gear_blanket:      media/10cc6a01a721a3550cf0bc5926ac6cfd.jpg
+
+# --- Partner logos ------------------------------------------------------------
+partner_gearhead:    media/1d918b0d8a29cc60d03ada5195766d7b.webp
+partner_bfg:         media/c5fb0d68aa9a2d42f8b545d7f51caccd.jpg
+partner_bfg_blue:    media/7e670a376a6402322df39e8f0b716c06.webp
+partner_overlander:  media/70102af15122b7c0bf5ac0a14fc50495.webp
+partner_artemis:     media/fa748db1aa0e853cabc927983877b821.webp
+partner_topo:        media/eeb90fd1fb58127ca90025f3c5460ba8.jpg
+icon_facebook:       media/7544416bd5e5d2077cc968c45bdc99f1.jpg

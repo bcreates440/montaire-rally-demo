@@ -1,0 +1,60 @@
+# Ticket / registration products. These map 1:1 to the pass artwork on the
+# current site. PRICES ARE PLACEHOLDERS for the demo — real prices live in Stride.
+passes:
+  - id: entry
+    name: Rally Entry Pass
+    tagline: Full three-day driver registration
+    image: pass_entry
+    price: 1495
+    per: per vehicle
+    featured: true
+    includes:
+      - Three days and 550+ miles on the curated route
+      - Official windshield banner and personalized rally number
+      - Driver credential package and participant directory listing
+      - Eligibility for class awards and the People's Choice Award
+  - id: single
+    name: Single Day Rally Pass
+    tagline: One day. Epic roads. Unforgettable memories.
+    image: pass_single
+    price: 595
+    per: per vehicle
+    includes:
+      - Choose your day on the route
+      - Driver credential and windshield banner
+      - Reception and dinner access for that day
+  - id: lodging
+    name: Lodging Pass
+    tagline: Three nights of luxury lodging
+    image: pass_lodging
+    price: 1650
+    per: per room, 3 nights
+    includes:
+      - Three nights at the rally's partner lodges
+      - Luxury accommodations
+      - Exclusive experiences
+  - id: lunch
+    name: Lunch & Snack Pass
+    tagline: Fuel for every stage
+    image: pass_lunch
+    price: 185
+    per: per person
+    includes:
+      - Curated lunch and snack stops along the route
+  - id: apparel
+    name: Complete Apparel Package
+    tagline: Look the part from the first meeting to the awards dinner
+    image: pass_apparel
+    price: 325
+    per: per person
+    includes:
+      - The full Montaire Rally driver apparel set
+  - id: coin
+    name: Coin Quest Pass
+    tagline: Collect. Explore. Achieve.
+    image: pass_coin
+    price: 145
+    per: per participant
+    includes:
+      - All 12 challenge coins and the display case
+      - Eligibility for the Coin Quest Finisher Award

@@ -1,0 +1,30 @@
+# Montaire Rally — demo rebuild (Jekyll, GitHub Pages compatible, no plugins)
+title: Montaire Rally
+tagline: The premier grand touring experience of the Blue Ridge Mountains
+description: Three days. 550+ miles of asphalt. 15 stages. April 22–24, 2027 in Western North Carolina.
+# Demo address on GitHub Pages. At launch: set url to his domain and baseurl to "".
+url: "https://bcreates440.github.io"
+baseurl: "/montaire-rally-demo"
+
+# --- Images & video ---------------------------------------------------------
+# Every image/video from the old Canva site, resized and stored in the repo.
+# Each image also has a small copy under assets/rally/thumb/ for grids and tiles.
+asset_base: "/assets/rally"
+
+# --- Ticketing / registration (Stride Events) -------------------------------
+# Replace with the real event URL once the Stride event is created.
+stride_event_url: "https://demo.strideevents.com/"
+stride_button_label: "Register on Stride"
+
+# --- Links carried over from the current site -------------------------------
+facebook_url: "https://www.facebook.com/profile.php?id=61590469900903"
+store_url: "https://montaire-rally.myshopify.com/"
+
+event:
+  name: Montaire Rally
+  dates: April 22–24, 2027
+  region: Western North Carolina
+  start: "2027-04-22"
+
+exclude: [Gemfile, README.md, HANDOFF.md, preview, vendor, node_modules, Gemfile.lock]
+plugins: []

@@ -1,0 +1,29 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <img class="logo" src="{{ site.asset_base | relative_url }}/{{ site.data.assets.logo }}" alt="Montaire Rally" loading="lazy">
+        <p>{{ site.event.dates }} · {{ site.event.region }}<br>Three days. 550+ miles of asphalt. 15 stages.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="{{ site.baseurl }}/#experience">The Experience</a></li>
+          <li><a href="{{ site.baseurl }}/#route">The Route</a></li>
+          <li><a href="{{ site.baseurl }}/#vehicles">Vehicles</a></li>
+          <li><a href="{{ site.baseurl }}/#schedule">Schedule</a></li>
+          <li><a href="{{ site.baseurl }}/gallery/">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Join</h4>
+        <ul>
+          <li><a href="{{ site.baseurl }}/register/">Register &amp; tickets</a></li>
+          <li><a href="{{ site.store_url }}">Official gear store</a></li>
+          <li><a href="{{ site.facebook_url }}" style="display:inline-flex;align-items:center;gap:8px"><img src="{{ site.asset_base | relative_url }}/{{ site.data.assets.icon_facebook }}" alt="" width="20" height="20" style="width:20px;height:20px;object-fit:cover;object-position:left" loading="lazy">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal"><span>© Montaire Rally. Demo rebuild — not the live site.</span><span>Ticketing powered by Stride Events</span></div>
+  </div>
+</footer>

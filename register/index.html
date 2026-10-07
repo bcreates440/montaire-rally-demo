@@ -1,0 +1,60 @@
+---
+layout: default
+title: Register
+description: Choose your Montaire Rally passes and check out securely on Stride.
+---
+{% assign A = site.data.assets %}
+<section class="page-hero">
+  <div class="wrap">
+    <span class="kicker">{{ site.event.dates }} · {{ site.event.region }}</span>
+    <h1>Register for the rally</h1>
+    <p class="lede" style="max-width:34em;margin-inline:auto">Build your order here, then finish on Stride — payment, waiver, and confirmation in one secure checkout.</p>
+  </div>
+</section>
+
+<section class="band-navy" style="padding-top:48px">
+  <div class="wrap reg-grid">
+    <div>
+      <span class="demo-note">Demo pricing — real prices are set in Stride</span>
+      <div id="opts">
+        {% for p in site.data.passes.passes %}
+        <div class="opt" data-id="{{ p.id }}" data-price="{{ p.price }}" data-name="{{ p.name }}">
+          <img src="{{ site.asset_base | relative_url }}/thumb/{{ A[p.image] }}" alt="" loading="lazy">
+          <div>
+            <h3>{{ p.name }}</h3>
+            <p>{{ p.tagline }}</p>
+            <div class="qty" role="group" aria-label="Quantity for {{ p.name }}">
+              <button type="button" data-d="-1" aria-label="Fewer">−</button>
+              <output>0</output>
+              <button type="button" data-d="1" aria-label="More">+</button>
+            </div>
+          </div>
+          <div class="pr">{% include price.html n=p.price %}<br><small style="font:500 .7rem/1.2 var(--sans);color:var(--muted);letter-spacing:0">{{ p.per }}</small></div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <aside class="summary" aria-live="polite">
+      <h3>Your order</h3>
+      <ul id="sum-list"><li class="empty"><span>Nothing selected yet</span></li></ul>
+      <div class="tot"><span>Estimated total</span><span id="sum-total">$0</span></div>
+      <a id="go" class="btn primary" style="width:100%" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">{{ site.stride_button_label }} →</a>
+      <ul class="trust">
+        <li>Secure checkout</li><li>Digital waiver</li><li>Promo codes</li><li>Gift certificates</li>
+      </ul>
+      <div class="center" style="margin-top:1.1rem;font-size:.75rem;opacity:.7">Official tire partner<br><img src="{{ site.asset_base | relative_url }}/{{ A.partner_bfg_blue }}" alt="BFGoodrich Tires" style="height:28px;width:auto;margin:8px auto 0" loading="lazy"></div>
+      <small>You’ll select the same passes on Stride’s event page. Taxes and processing fees, if any, are shown at checkout.</small>
+    </aside>
+
+    <div class="reg-steps">
+      <h3>What you’ll be asked at checkout</h3>
+      <ol class="steps">
+        <li><b>Driver &amp; passenger</b><span>Names, contact info, and emergency contact.</span></li>
+        <li><b>Vehicle</b><span>Class, make, model, year, and plate for your banner and number.</span></li>
+        <li><b>Waiver</b><span>Signed digitally before payment completes.</span></li>
+        <li><b>Payment</b><span>Card, promo code, or gift certificate.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>

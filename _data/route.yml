@@ -1,0 +1,5 @@
+days:
+  - { label: "Day 1 · Thursday", miles: "~155–175 mi", color: copper, stops: "Blowing Rock start · Little Switzerland · Blue Ridge Parkway · Craggy Gardens · Asheville" }
+  - { label: "Day 2 · Friday",   miles: "~165–190 mi", color: green,  stops: "Franklin · Highlands · Cashiers · Lake Toxaway · Hendersonville · Brevard" }
+  - { label: "Day 3 · Saturday", miles: "~170–200 mi", color: blue,   stops: "Chimney Rock · Lake Lure · Robbinsville · Cherohala Skyway · Nantahala Gorge · Tail of the Dragon (optional)" }
+highlights: [Blue Ridge Parkway, Linville Falls, Nantahala Gorge, Cherohala Skyway, Highlands]

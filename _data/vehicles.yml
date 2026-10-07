@@ -1,0 +1,34 @@
+classes:
+  - name: Vintage Sports Cars
+    kicker: Timeless icons
+    image: man_jaguar
+    blurb: The pioneers of grand touring. Timeless design, mechanical purity, and unmistakable character.
+    examples: [Porsche 356, Porsche 911 (1964–1998), Jaguar E-Type, Austin-Healey 3000, Triumph TR6, MG B, Alfa Romeo Spider, Ferrari Dino, BMW 2002, Mercedes-Benz SL Pagoda, Lotus Elan]
+  - name: Modern Sports Cars
+    kicker: Precision meets performance
+    image: woman_lexus
+    blurb: Modern engineering. Emotional connection. Today's finest driver's machines.
+    examples: [Porsche 718 Cayman, Porsche 911 (996–992), BMW M2 / M3 / M4, BMW Z4 M, Audi R8, Lotus Emira, Lotus Evora, Jaguar F-Type, Aston Martin Vantage, Mercedes-AMG GT, Alpine A110]
+  - name: Vintage Adventure & Touring 4x4
+    kicker: Legends beyond the pavement
+    image: woman_defender
+    blurb: Heritage. Capability. Timeless design. Built for adventure. Made to last.
+    examples: [Toyota Land Cruiser FJ40, Land Cruiser 60 / 80 Series, Land Rover Series I & II, Defender 90 & 110, Range Rover Classic, Mercedes-Benz G-Class, Ford Bronco (1966–1977), Jeep Wagoneer, Jeep CJ-7, International Scout, Ineos Grenadier]
+  - name: Supercars & Hypercars
+    kicker: Engineering without compromise
+    image: viaduct_convoy
+    blurb: Extraordinary performance. Uncompromising design. The world's most advanced machines.
+    examples: [Ferrari 296 GTB, Ferrari SF90, Lamborghini Huracán, Lamborghini Revuelto, McLaren 720S, McLaren Artura, Porsche Carrera GT, Porsche 918 Spyder, Ford GT, Mercedes-AMG ONE, Aston Martin Valkyrie, Bugatti Chiron, Koenigsegg Jesko, Rimac Nevera]
+standards:
+  - Exceptionally maintained
+  - Clean and professionally presented
+  - Street legal and fully insured
+  - Mechanically sound
+  - Respectful of fellow participants and local communities
+identification:
+  - Official Montaire Rally windshield banner
+  - Driver and passenger door roundel
+  - Personalized rally number
+  - Vehicle profile in the participant directory
+  - Driver credential package
+  - Eligibility for class awards and the People's Choice Award

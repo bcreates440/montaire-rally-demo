@@ -1,0 +1,1 @@
+<img src="{{ site.asset_base | relative_url }}/{% if include.thumb %}thumb/{% endif %}{{ site.data.assets[include.key] }}" alt="{{ include.alt }}"{% if include.w %} width="{{ include.w }}" height="{{ include.h }}"{% endif %}{% if include.class %} class="{{ include.class }}"{% endif %}{% if include.eager %} loading="eager"{% else %} loading="lazy"{% endif %} decoding="async">

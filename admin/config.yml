@@ -1,0 +1,69 @@
+# Decap CMS — lets the rally organizers edit their own site (no code).
+# Connect to the shared OAuth worker from client-sites-auth before going live.
+backend:
+  name: github
+  repo: OWNER/montaire-rally-site        # TODO: set after the repo is created
+  branch: main
+  base_url: https://YOUR-OAUTH-WORKER.example   # TODO: client-sites-auth worker URL
+media_folder: assets/rally
+public_folder: /assets/rally
+collections:
+  - name: data
+    label: Rally content
+    files:
+      - name: passes
+        label: Passes & pricing
+        file: _data/passes.yml
+        fields:
+          - label: Passes
+            name: passes
+            widget: list
+            fields:
+              - { label: ID, name: id, widget: string }
+              - { label: Name, name: name, widget: string }
+              - { label: Tagline, name: tagline, widget: string }
+              - { label: Image (key from _data/assets.yml), name: image, widget: string }
+              - { label: Price (USD), name: price, widget: number }
+              - { label: Per, name: per, widget: string }
+              - { label: Most popular, name: featured, widget: boolean, required: false }
+              - { label: Includes, name: includes, widget: list }
+      - name: schedule
+        label: Schedule
+        file: _data/schedule.yml
+        fields:
+          - label: Days
+            name: days
+            widget: list
+            fields:
+              - { label: Day, name: day, widget: string }
+              - { label: Weekday, name: weekday, widget: string }
+              - { label: Date, name: date, widget: string }
+              - { label: Miles, name: miles, widget: string }
+              - label: Items
+                name: items
+                widget: list
+                fields:
+                  - { label: Time, name: time, widget: string }
+                  - { label: Title, name: title, widget: string }
+                  - { label: Where, name: where, widget: string, required: false }
+      - name: faq
+        label: FAQ
+        file: _data/faq.yml
+        fields:
+          - label: Questions
+            name: faq
+            widget: list
+            fields:
+              - { label: Question, name: q, widget: string }
+              - { label: Answer, name: a, widget: text }
+  - name: config
+    label: Site settings
+    files:
+      - name: settings
+        label: Event link & dates
+        file: _config.yml
+        fields:
+          - { label: Stride event URL, name: stride_event_url, widget: string }
+          - { label: Button label, name: stride_button_label, widget: string }
+          - { label: Facebook URL, name: facebook_url, widget: string }
+          - { label: Store URL, name: store_url, widget: string }

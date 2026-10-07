@@ -1,0 +1,1 @@
+{% comment %}ponytail: adds one thousands comma, fine below $1,000,000{% endcomment %}{% assign n = include.n | plus: 0 %}{% if n >= 1000 %}${{ n | divided_by: 1000 }},{{ n | modulo: 1000 | plus: 1000 | append: '' | slice: 1, 3 }}{% else %}${{ n }}{% endif %}

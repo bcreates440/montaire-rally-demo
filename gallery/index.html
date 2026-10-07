@@ -1,0 +1,39 @@
+---
+layout: default
+title: Gallery
+description: Every image from the Montaire Rally — drivers, cars, gear, passes, and posters.
+---
+{% assign A = site.data.assets %}
+{% assign B = site.asset_base | relative_url %}
+<section class="page-hero">
+  <div class="wrap">
+    <span class="kicker">Gallery</span>
+    <h1>The rally in pictures</h1>
+    <p class="lede">Drivers, machines, roads, and the keepsakes you take home.</p>
+  </div>
+</section>
+<section class="band-navy" style="padding-top:40px">
+  <div class="wrap">
+    <div class="filters">
+      <button class="on" data-cat="all">All</button>
+      <button data-cat="people">Drivers</button>
+      <button data-cat="road">Roads &amp; lodging</button>
+      <button data-cat="passes">Passes</button>
+      <button data-cat="gear">Gear</button>
+      <button data-cat="posters">Posters &amp; maps</button>
+    </div>
+    <div class="masonry">
+      {% assign people = "driver_red_suit,couple_beach_xl,man_jaguar,man_convertible,man_firepit,woman_defender,woman_lexus,man_classic,man_peace_sign,pair_porsche_dam,man_tumbler" | split: "," %}
+      {% assign road = "viaduct_convoy,lodging_aerial,hero_poster,route_poster,coin_poster,strip_1,strip_2,strip_3" | split: "," %}
+      {% assign passes = "pass_entry,pass_single,pass_lodging,pass_lunch,pass_apparel,pass_coin" | split: "," %}
+      {% assign gear = "gear_windshield,gear_roundel,gear_door_plate,gear_plaque,gear_polaroid,gear_blanket,logo_hires" | split: "," %}
+      {% assign posters = "poster_schedule,poster_vehicles,poster_coinquest,poster_route_text,poster_philosophy,route_map" | split: "," %}
+      {% for k in people %}<figure data-cat="people" tabindex="0" role="button" data-full="{{ B }}/{{ A[k] }}"><img src="{{ B }}/thumb/{{ A[k] }}" alt="Montaire Rally driver photo" loading="lazy"></figure>{% endfor %}
+      {% for k in road %}<figure data-cat="road" tabindex="0" role="button" data-full="{{ B }}/{{ A[k] }}"><img src="{{ B }}/thumb/{{ A[k] }}" alt="Blue Ridge roads and lodging" loading="lazy"></figure>{% endfor %}
+      {% for k in passes %}<figure class="light" data-cat="passes" tabindex="0" role="button" data-full="{{ B }}/{{ A[k] }}"><img src="{{ B }}/thumb/{{ A[k] }}" alt="Montaire Rally pass artwork" loading="lazy"></figure>{% endfor %}
+      {% for k in gear %}<figure class="light" data-cat="gear" tabindex="0" role="button" data-full="{{ B }}/{{ A[k] }}"><img src="{{ B }}/thumb/{{ A[k] }}" alt="Montaire Rally gear" loading="lazy"></figure>{% endfor %}
+      {% for k in posters %}<figure data-cat="posters" tabindex="0" role="button" data-full="{{ B }}/{{ A[k] }}"><img src="{{ B }}/thumb/{{ A[k] }}" alt="Original Montaire Rally poster" loading="lazy"></figure>{% endfor %}
+    </div>
+  </div>
+</section>
+<div class="lightbox" role="dialog" aria-label="Image viewer"><button aria-label="Close">×</button><img alt=""></div>

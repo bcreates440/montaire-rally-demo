@@ -1,0 +1,37 @@
+days:
+  - day: Day 1
+    weekday: Thursday
+    date: April 22
+    miles: "~155–175 miles"
+    items:
+      - time: "8:30 AM – 12:00 PM"
+        title: Registration & Driver's Meeting
+        where: Clover Hill Plantation, Happy Valley, North Carolina
+      - time: "12:00 PM"
+        title: Rally start
+        where: Blowing Rock, North Carolina
+      - time: "7:00 PM – 9:00 PM"
+        title: Reception
+        where: Strolling hors d'oeuvres · location to be announced
+  - day: Day 2
+    weekday: Friday
+    date: April 23
+    miles: "~165–190 miles"
+    items:
+      - time: "9:00 AM"
+        title: Coffee & Driver's Meeting
+        where: ""
+      - time: "7:00 PM – 9:00 PM"
+        title: Driver Recap & Reception
+        where: Strolling hors d'oeuvres · location to be announced
+  - day: Day 3
+    weekday: Saturday
+    date: April 24
+    miles: "~170–200 miles"
+    items:
+      - time: "9:00 AM"
+        title: Coffee & Driver's Meeting
+        where: ""
+      - time: "7:00 PM – 9:00 PM"
+        title: Awards & Dinner
+        where: Fontana Village Resort, Fontana Dam, North Carolina
