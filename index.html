@@ -17,7 +17,7 @@ description: The premier grand touring experience of the Blue Ridge Mountains â€
     <h1>The premier grand touring experience of the <em>Blue Ridge Mountains.</em></h1>
     <p class="sub">Ancient mountains. Timeless machines. Endless adventure. Three days of curated roads, camaraderie, and a rally that is deliberately not a race.</p>
     <div class="btn-row">
-      <a class="btn primary" href="{{ site.baseurl }}/register/">Register your car</a>
+      <a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register your car</a>
       <a class="btn" href="#route">See the route</a>
     </div>
     <div class="stats">
@@ -41,7 +41,7 @@ description: The premier grand touring experience of the Blue Ridge Mountains â€
       <p class="accent">The Montaire Rally changes the paradigm.</p>
       <p>We believe the true soul of driving lies in the pure, unadulterated harmony between a finely tuned machine, an unforgiving ribbon of mountain tarmac, and the shared exhaustion and exhilaration at the end of a demanding dayâ€™s journey.</p>
       <p class="strong">This is not a race. There are no stopwatches, no timing transponders, and no podiums. We have stripped away the ego of competitive racing and replaced it with something far rarer: pure grand touring camaraderie.</p>
-      <a class="btn" href="{{ B }}/{{ A.poster_philosophy }}" target="_blank" rel="noopener">Read the original manifesto</a>
+      <div class="btn-row"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register your car</a><a class="btn" href="{{ B }}/{{ A.poster_philosophy }}" target="_blank" rel="noopener">Read the original manifesto</a></div>
     </div>
     <div>
       <div class="photo tall">{% include img.html key="man_firepit" alt="A driver with a mug beside a fire pit at the lodge" %}</div>
@@ -85,6 +85,7 @@ description: The premier grand touring experience of the Blue Ridge Mountains â€
     <div class="route-video" style="margin-top:36px">
       <video muted loop playsinline controls preload="none" poster="{{ B }}/{{ A.route_poster }}"><source src="{{ B }}/{{ A.route_video_sm }}" type="video/mp4" media="(max-width: 700px)"><source src="{{ B }}/{{ A.route_video }}" type="video/mp4"></video>
     </div>
+    <p class="center" style="margin-top:30px"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register for the drive</a></p>
   </div>
 </section>
 
@@ -127,7 +128,7 @@ description: The premier grand touring experience of the Blue Ridge Mountains â€
       <div class="photo wide">{% include img.html key="gear_roundel" alt="Personalized rally number roundel" class="contain" %}</div>
       <div class="photo wide">{% include img.html key="gear_door_plate" alt="Driver door plate" class="contain" %}</div>
     </div>
-    <p class="center" style="margin-top:28px"><a class="btn" href="{{ B }}/{{ A.poster_vehicles }}" target="_blank" rel="noopener">View the original vehicle guide</a></p>
+    <div class="btn-row" style="margin-top:28px;justify-content:center"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register your car</a><a class="btn" href="{{ B }}/{{ A.poster_vehicles }}" target="_blank" rel="noopener">View the original vehicle guide</a></div>
   </div>
 </section>
 
@@ -161,7 +162,7 @@ description: The premier grand touring experience of the Blue Ridge Mountains â€
         <span class="kicker">Lodging</span>
         <h3 style="font-size:1.9rem">Three nights of luxury lodging</h3>
         <p>Rest at partner lodges chosen for the same reason as the roads: theyâ€™re worth the trip. Add the Lodging Pass when you register and your rooms, meals, and exclusive experiences are handled in one checkout.</p>
-        <div class="btn-row"><a class="btn primary" href="{{ site.baseurl }}/register/">Add lodging</a><a class="btn" href="{{ B }}/{{ A.poster_schedule }}" target="_blank" rel="noopener">Original schedule poster</a></div>
+        <div class="btn-row"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Add lodging</a><a class="btn" href="{{ B }}/{{ A.poster_schedule }}" target="_blank" rel="noopener">Original schedule poster</a></div>
       </div>
     </div>
   </div>
@@ -184,7 +185,7 @@ description: The premier grand touring experience of the Blue Ridge Mountains â€
         {% for c in site.data.coins %}<li><b>{{ c.n }}</b>{{ c.name }}{% if c.note %}<small>{{ c.note }}</small>{% endif %}</li>{% endfor %}
       </ol>
       <p>Complete all twelve to earn the Coin Quest Finisher Award. <em style="color:var(--copper-hi)">Collect the journey. Earn the distinction. Remember the drive.</em></p>
-      <div class="btn-row"><a class="btn primary" href="{{ site.baseurl }}/register/">Add the Coin Quest</a><a class="btn" href="{{ B }}/{{ A.poster_coinquest }}" target="_blank" rel="noopener">Original poster</a></div>
+      <div class="btn-row"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Add the Coin Quest</a><a class="btn" href="{{ B }}/{{ A.poster_coinquest }}" target="_blank" rel="noopener">Original poster</a></div>
     </div>
   </div>
 </section>
@@ -212,7 +213,7 @@ description: The premier grand touring experience of the Blue Ridge Mountains â€
       </article>
       {% endfor %}
     </div>
-    <p class="center" style="margin-top:34px"><a class="btn primary" href="{{ site.baseurl }}/register/">Start registration</a></p>
+    <p class="center" style="margin-top:34px"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Start registration</a></p>
     <ol class="steps" style="color:var(--cream-ink)">
       <li style="background:#fff;border-color:rgba(27,37,54,.12)"><b>Pick your pass</b><span style="color:#46526a">Entry, single day, lodging, meals, apparel, and the Coin Quest.</span></li>
       <li style="background:#fff;border-color:rgba(27,37,54,.12)"><b>Tell us about the car</b><span style="color:#46526a">Class, make, model, and year â€” the info the rally needs for your banner and number.</span></li>
@@ -246,7 +247,7 @@ description: The premier grand touring experience of the Blue Ridge Mountains â€
         <ul class="store-list">
           {% for s in site.data.gear.store %}<li><a href="{{ s.url }}">{{ s.name }}</a></li>{% endfor %}
         </ul>
-        <p style="margin-top:1.2rem"><a class="btn light" href="{{ site.store_url }}">Visit the store</a></p>
+        <div class="btn-row" style="margin-top:1.2rem"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Add the apparel package</a><a class="btn light" href="{{ site.store_url }}">Visit the store</a></div>
       </div>
     </div>
   </div>
@@ -282,6 +283,6 @@ description: The premier grand touring experience of the Blue Ridge Mountains â€
     {% for f in site.data.faq.faq %}
     <details><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>
     {% endfor %}
-    <div class="center" style="margin-top:46px"><a class="btn primary" href="{{ site.baseurl }}/register/">Register now</a></div>
+    <div class="center" style="margin-top:46px"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register now</a></div>
   </div>
 </section>
