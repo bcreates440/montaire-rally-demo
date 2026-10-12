@@ -1,0 +1,7 @@
+# Home page "Explore the rally" cards.
+- { title: The Route,     url: /schedule/#route,    image: hero_poster,    kicker: 3 days · 15 stages, blurb: "From the Blue Ridge Parkway to the Tail of the Dragon — 550+ miles, no interstates." }
+- { title: Vehicles,      url: /schedule/#vehicles, image: man_jaguar,     kicker: Four classes,       blurb: "Vintage and modern sports cars, adventure 4x4s, supercars and hypercars." }
+- { title: Schedule,      url: /schedule/,          image: lodging_aerial, kicker: Day by day,         blurb: "Driver's meetings, stages, lunches, and three nights of luxury lodging." }
+- { title: Coin Quest,    url: /coin-quest/,        image: gear_plaque,    kicker: Twelve coins,       blurb: "Collect a challenge coin at each iconic stop and earn the Finisher Award." }
+- { title: Passes,        url: /passes/,            image: pass_entry,     kicker: Tickets,            blurb: "Entry, single-day, lodging, meals, apparel, and the Coin Quest — one checkout." }
+- { title: Official Gear, url: /gear/,              image: man_tumbler,    kicker: Look the part,      blurb: "Windshield banners, door roundels, apparel, and the official store." }

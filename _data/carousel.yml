@@ -1,0 +1,21 @@
+# FAQ page photo carousel — real photos plus the info posters. Click any to enlarge.
+- { key: viaduct_convoy,    alt: "Rally cars crossing the Linn Cove Viaduct" }
+- { key: route_map,         alt: "Illustrated map of the three-day route" }
+- { key: driver_red_suit,   alt: "Driver in a blue racing suit beside a red classic" }
+- { key: hero_poster,       alt: "Grey Porsche 911 on a misty mountain road" }
+- { key: poster_schedule,   alt: "Day-by-day schedule poster" }
+- { key: man_jaguar,        alt: "Driver with a green Jaguar E-Type" }
+- { key: lodging_aerial,    alt: "Mountain lodge and village at sunset" }
+- { key: woman_defender,    alt: "Driver with a Land Rover Defender" }
+- { key: poster_vehicles,   alt: "Vehicle classes and standards poster" }
+- { key: man_convertible,   alt: "Driver in a convertible" }
+- { key: pair_porsche_dam,  alt: "Two drivers with Porsches at a mountain dam" }
+- { key: poster_coinquest,  alt: "Coin Quest poster listing the twelve coins" }
+- { key: woman_lexus,       alt: "Driver with a white Lexus LC" }
+- { key: man_classic,       alt: "Driver beside a black classic roadster" }
+- { key: poster_route_text, alt: "Route overview poster" }
+- { key: man_peace_sign,    alt: "Driver flashing a peace sign in a red convertible" }
+- { key: man_firepit,       alt: "Driver with a mug beside a fire pit at the lodge" }
+- { key: poster_philosophy, alt: "The philosophy of the drive poster" }
+- { key: man_tumbler,       alt: "Driver with a rally tumbler beside a red Ferrari" }
+- { key: couple_beach_xl,   alt: "The Montaire Rally hosts on a beach" }

@@ -1,0 +1,29 @@
+---
+layout: default
+title: The Coin Quest
+description: Twelve exclusive challenge coins at iconic locations along the Montaire Rally route. Collect all twelve to earn the Finisher Award.
+---
+{% assign A = site.data.assets %}
+{% assign B = site.asset_base | relative_url %}
+{% include page-hero.html img="man_convertible" kicker="The Montaire Coin Quest™" title="A journey you can hold in your hand" %}
+
+<section class="band-navy">
+  <div class="wrap split flip">
+    <div>
+      <div class="photo wide">
+        <video muted loop playsinline controls preload="none" poster="{{ B }}/{{ A.coin_poster }}" style="width:100%;aspect-ratio:16/10;object-fit:cover"><source src="{{ B }}/{{ A.coin_video_sm }}" type="video/mp4" media="(max-width: 700px)"><source src="{{ B }}/{{ A.coin_video }}" type="video/mp4"></video>
+      </div>
+      <div class="photo wide" style="margin-top:16px">{% include img.html key="gear_plaque" alt="Montaire Rally coin plaque" %}</div>
+    </div>
+    <div>
+      
+      
+      <p>Twelve exclusive challenge coins at iconic locations throughout the Blue Ridge Mountains. Each coin commemorates a memorable destination, legendary roadway, or defining moment along the route.</p>
+      <ol class="coins">
+        {% for c in site.data.coins %}<li><b>{{ c.n }}</b>{{ c.name }}{% if c.note %}<small>{{ c.note }}</small>{% endif %}</li>{% endfor %}
+      </ol>
+      <p>Complete all twelve to earn the Coin Quest Finisher Award. <em style="color:var(--copper-hi)">Collect the journey. Earn the distinction. Remember the drive.</em></p>
+      <div class="btn-row"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Add the Coin Quest</a></div>
+    </div>
+  </div>
+</section>

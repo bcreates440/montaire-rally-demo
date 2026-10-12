@@ -1,0 +1,8 @@
+<section class="band-cream" style="padding:64px 0">
+  <div class="wrap center">
+    <span class="kicker">Partners</span>
+    <div class="partners" style="margin-top:1.4rem">
+      {% for p in site.data.partners %}<span title="{{ p.name }}">{% include img.html thumb=true key=p.image alt=p.name %}</span>{% endfor %}
+    </div>
+  </div>
+</section>

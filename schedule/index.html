@@ -1,0 +1,107 @@
+---
+layout: default
+title: Schedule, Route & Vehicles
+description: The day-by-day Montaire Rally schedule, the 550+ mile route, and the four vehicle classes — April 22–24, 2027.
+---
+{% assign A = site.data.assets %}
+{% assign B = site.asset_base | relative_url %}
+{% include page-hero.html img="hero_poster" kicker="Schedule" title="The journey begins here" lede="Three extraordinary days of driving, camaraderie, and celebration across the most breathtaking roads in the Blue Ridge Mountains." %}
+
+<section id="schedule-days" class="band-deep">
+  <div class="wrap">
+    <div class="timeline">
+      {% for d in site.data.schedule.days %}
+      <article class="tl-day">
+        <div class="tl-head">
+          <span class="d">{{ d.day }} · {{ d.weekday }}</span>
+          <h3>{{ d.date }} <small>{{ d.miles }}</small></h3>
+        </div>
+        <ul class="tl-items">
+          {% for i in d.items %}
+          <li><span class="t">{{ i.time }}</span><b>{{ i.title }}</b>{% if i.where != "" %}<span>{{ i.where }}</span>{% endif %}</li>
+          {% endfor %}
+        </ul>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="split" style="margin-top:44px">
+      <div class="photo">{% include img.html key="lodging_aerial" w=1024 h=434 alt="Mountain lodge and village at sunset" %}</div>
+      <div>
+        <span class="kicker">Lodging</span>
+        <h3 style="font-size:1.9rem">Three nights of luxury lodging</h3>
+        <p>Rest at partner lodges chosen for the same reason as the roads: they’re worth the trip. Add the Lodging Pass when you register and your rooms, meals, and exclusive experiences are handled in one checkout.</p>
+        <div class="btn-row"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Add lodging</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTE -->
+<section id="route" class="band-cream">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">The route</span>
+      <h2>550+ miles of America’s finest driving roads</h2>
+      <p class="lede">Every mile has been chosen for a reason.</p>
+      <p>From the sweeping vistas of the Blue Ridge Parkway to the technical curves of the Tail of the Dragon, every stage has been carefully curated to reward precision, rhythm, and the simple joy of driving. We avoided the interstates and found the backroads that truly connect a driver to the landscape.</p>
+    </div>
+    <div class="route-map">{% include img.html key="route_map" w=1448 h=1086 alt="Illustrated map of the three-day Montaire Rally route through the North Carolina and Tennessee mountains" %}</div>
+    <div class="grid g3" style="margin-top:26px">
+      {% for d in site.data.route.days %}
+      <article class="day-card {{ d.color }}">
+        <h3>{{ d.label }}</h3>
+        <div class="mi">{{ d.miles }}</div>
+        <p>{{ d.stops }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    <p class="note center">Routes may change with weather, road closures, or unforeseen circumstances. Organizers put safety first and update drivers through official channels.</p>
+    <div class="route-video" style="margin-top:36px">
+      <video muted loop playsinline controls preload="none" poster="{{ B }}/{{ A.route_poster }}"><source src="{{ B }}/{{ A.route_video_sm }}" type="video/mp4" media="(max-width: 700px)"><source src="{{ B }}/{{ A.route_video }}" type="video/mp4"></video>
+    </div>
+    <p class="center" style="margin-top:30px"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register for the drive</a></p>
+  </div>
+</section>
+
+<!-- VEHICLES -->
+<section id="vehicles" class="band-navy">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Vehicles</span>
+      <h2>Machines worthy of the journey</h2>
+      <p class="lede">A curated collection of automotive excellence.</p>
+      <p>The rally celebrates the art of driving through an extraordinary collection of automobiles spanning generations of engineering and design. Our focus is not horsepower or lap times — it’s heritage, craftsmanship, and the shared appreciation for remarkable machines on remarkable roads.</p>
+    </div>
+    <div class="grid g2">
+      {% for c in site.data.vehicles.classes %}
+      <article class="card">
+        <div class="media">{% include img.html key=c.image alt=c.name %}</div>
+        <div class="body">
+          <span class="eyebrow">{{ c.kicker }}</span>
+          <h3>{{ c.name }}</h3>
+          <p>{{ c.blurb }}</p>
+          <ul class="tags">{% for e in c.examples %}<li>{{ e }}</li>{% endfor %}</ul>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="grid g2" style="margin-top:26px">
+      <div class="card"><div class="body">
+        <span class="eyebrow">Vehicle standards</span>
+        <h3>A celebration of great automobiles — not a race</h3>
+        <ul class="tags">{% for s in site.data.vehicles.standards %}<li>{{ s }}</li>{% endfor %}</ul>
+      </div></div>
+      <div class="card"><div class="body">
+        <span class="eyebrow">Vehicle identification</span>
+        <h3>Every entry receives</h3>
+        <ul class="tags">{% for s in site.data.vehicles.identification %}<li>{{ s }}</li>{% endfor %}</ul>
+      </div></div>
+    </div>
+    <div class="grid g3" style="margin-top:22px">
+      <div class="photo wide">{% include img.html key="gear_windshield" alt="Official Montaire Rally windshield banner" class="contain" %}</div>
+      <div class="photo wide">{% include img.html key="gear_roundel" alt="Personalized rally number roundel" class="contain" %}</div>
+      <div class="photo wide">{% include img.html key="gear_door_plate" alt="Driver door plate" class="contain" %}</div>
+    </div>
+    <div class="btn-row" style="margin-top:28px;justify-content:center"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register your car</a></div>
+  </div>
+</section>

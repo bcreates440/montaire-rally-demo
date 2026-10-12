@@ -8,11 +8,8 @@
       <div>
         <h4>Explore</h4>
         <ul>
-          <li><a href="{{ site.baseurl }}/#experience">The Experience</a></li>
-          <li><a href="{{ site.baseurl }}/#route">The Route</a></li>
-          <li><a href="{{ site.baseurl }}/#vehicles">Vehicles</a></li>
-          <li><a href="{{ site.baseurl }}/#schedule">Schedule</a></li>
-          <li><a href="{{ site.baseurl }}/gallery/">Gallery</a></li>
+          {% for n in site.data.nav %}<li><a href="{{ n.url | relative_url }}">{{ n.title }}</a></li>{% for c in n.children %}{% unless c.url == n.url %}<li><a href="{{ c.url | relative_url }}">{{ c.title }}</a></li>{% endunless %}{% endfor %}
+          {% endfor %}<li><a href="{{ '/about/' | relative_url }}">About us</a></li>
         </ul>
       </div>
       <div>

@@ -1,0 +1,35 @@
+---
+layout: default
+title: Passes
+description: Entry, single-day, lodging, meal, apparel, and Coin Quest passes for Montaire Rally — one checkout for the whole rally.
+---
+{% assign A = site.data.assets %}
+{% assign B = site.asset_base | relative_url %}
+{% include page-hero.html img="woman_lexus" kicker="Tickets &amp; registration" title="Choose your pass" lede="One checkout for the whole rally." %}
+
+<section class="band-cream">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:2rem"><span class="demo-note">Demo pricing — real prices are set in Stride</span></div>
+    <div class="grid g3">
+      {% for p in site.data.passes.passes %}
+      <article class="pass-card{% if p.featured %} featured{% endif %}">
+        {% if p.featured %}<span class="flag">Most popular</span>{% endif %}
+        <div class="art">{% include img.html thumb=true key=p.image alt=p.name %}</div>
+        <div class="body">
+          <h3>{{ p.name }}</h3>
+          <div class="tag">{{ p.tagline }}</div>
+          <ul>{% for x in p.includes %}<li>{{ x }}</li>{% endfor %}</ul>
+          <div class="price">{% include price.html n=p.price %} <small>{{ p.per }}</small></div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    <p class="center" style="margin-top:34px"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Start registration</a></p>
+    <ol class="steps" style="color:var(--cream-ink)">
+      <li style="background:#fff;border-color:rgba(27,37,54,.12)"><b>Pick your pass</b><span style="color:#46526a">Entry, single day, lodging, meals, apparel, and the Coin Quest.</span></li>
+      <li style="background:#fff;border-color:rgba(27,37,54,.12)"><b>Tell us about the car</b><span style="color:#46526a">Class, make, model, and year — the info the rally needs for your banner and number.</span></li>
+      <li style="background:#fff;border-color:rgba(27,37,54,.12)"><b>Sign the waiver</b><span style="color:#46526a">Collected at checkout, so nobody shows up to the driver’s meeting without one.</span></li>
+      <li style="background:#fff;border-color:rgba(27,37,54,.12)"><b>Pay securely</b><span style="color:#46526a">Promo codes and digital gift certificates supported. Confirmation arrives instantly.</span></li>
+    </ol>
+  </div>
+</section>

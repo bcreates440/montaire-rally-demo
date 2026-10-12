@@ -18,7 +18,7 @@ description: The premier grand touring experience of the Blue Ridge Mountains �
     <p class="sub">Ancient mountains. Timeless machines. Endless adventure. Three days of curated roads, camaraderie, and a rally that is deliberately not a race.</p>
     <div class="btn-row">
       <a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register your car</a>
-      <a class="btn" href="#route">See the route</a>
+      <a class="btn" href="{{ '/schedule/#route' | relative_url }}">See the route</a>
     </div>
     <div class="stats">
       <div><b>3</b><span>Days</span></div>
@@ -30,7 +30,7 @@ description: The premier grand touring experience of the Blue Ridge Mountains �
 </section>
 
 <!-- EXPERIENCE / PHILOSOPHY -->
-<section id="experience" class="band-navy">
+<section class="band-navy">
   <div class="wrap split">
     <div class="manifesto">
       <span class="kicker">The experience</span>
@@ -41,7 +41,7 @@ description: The premier grand touring experience of the Blue Ridge Mountains �
       <p class="accent">The Montaire Rally changes the paradigm.</p>
       <p>We believe the true soul of driving lies in the pure, unadulterated harmony between a finely tuned machine, an unforgiving ribbon of mountain tarmac, and the shared exhaustion and exhilaration at the end of a demanding day’s journey.</p>
       <p class="strong">This is not a race. There are no stopwatches, no timing transponders, and no podiums. We have stripped away the ego of competitive racing and replaced it with something far rarer: pure grand touring camaraderie.</p>
-      <div class="btn-row"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register your car</a><a class="btn" href="{{ B }}/{{ A.poster_philosophy }}" target="_blank" rel="noopener">Read the original manifesto</a></div>
+      <div class="btn-row"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register your car</a></div>
     </div>
     <div>
       <div class="photo tall">{% include img.html key="man_firepit" alt="A driver with a mug beside a fire pit at the lodge" %}</div>
@@ -62,227 +62,35 @@ description: The premier grand touring experience of the Blue Ridge Mountains �
   </div>
 </section>
 
-<!-- ROUTE -->
-<section id="route" class="band-cream">
+<!-- EXPLORE -->
+<section class="band-deep">
   <div class="wrap">
     <div class="section-head">
-      <span class="kicker">The route</span>
-      <h2>550+ miles of America’s finest driving roads</h2>
-      <p class="lede">Every mile has been chosen for a reason.</p>
-      <p>From the sweeping vistas of the Blue Ridge Parkway to the technical curves of the Tail of the Dragon, every stage has been carefully curated to reward precision, rhythm, and the simple joy of driving. We avoided the interstates and found the backroads that truly connect a driver to the landscape.</p>
-    </div>
-    <div class="route-map">{% include img.html key="route_map" w=1448 h=1086 alt="Illustrated map of the three-day Montaire Rally route through the North Carolina and Tennessee mountains" %}</div>
-    <div class="grid g3" style="margin-top:26px">
-      {% for d in site.data.route.days %}
-      <article class="day-card {{ d.color }}">
-        <h3>{{ d.label }}</h3>
-        <div class="mi">{{ d.miles }}</div>
-        <p>{{ d.stops }}</p>
-      </article>
-      {% endfor %}
-    </div>
-    <p class="note center">Routes may change with weather, road closures, or unforeseen circumstances. Organizers put safety first and update drivers through official channels.</p>
-    <div class="route-video" style="margin-top:36px">
-      <video muted loop playsinline controls preload="none" poster="{{ B }}/{{ A.route_poster }}"><source src="{{ B }}/{{ A.route_video_sm }}" type="video/mp4" media="(max-width: 700px)"><source src="{{ B }}/{{ A.route_video }}" type="video/mp4"></video>
-    </div>
-    <p class="center" style="margin-top:30px"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register for the drive</a></p>
-  </div>
-</section>
-
-<!-- VEHICLES -->
-<section id="vehicles" class="band-navy">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="kicker">Vehicles</span>
-      <h2>Machines worthy of the journey</h2>
-      <p class="lede">A curated collection of automotive excellence.</p>
-      <p>The rally celebrates the art of driving through an extraordinary collection of automobiles spanning generations of engineering and design. Our focus is not horsepower or lap times — it’s heritage, craftsmanship, and the shared appreciation for remarkable machines on remarkable roads.</p>
-    </div>
-    <div class="grid g2">
-      {% for c in site.data.vehicles.classes %}
-      <article class="card">
-        <div class="media">{% include img.html key=c.image alt=c.name %}</div>
-        <div class="body">
-          <span class="eyebrow">{{ c.kicker }}</span>
-          <h3>{{ c.name }}</h3>
-          <p>{{ c.blurb }}</p>
-          <ul class="tags">{% for e in c.examples %}<li>{{ e }}</li>{% endfor %}</ul>
-        </div>
-      </article>
-      {% endfor %}
-    </div>
-    <div class="grid g2" style="margin-top:26px">
-      <div class="card"><div class="body">
-        <span class="eyebrow">Vehicle standards</span>
-        <h3>A celebration of great automobiles — not a race</h3>
-        <ul class="tags">{% for s in site.data.vehicles.standards %}<li>{{ s }}</li>{% endfor %}</ul>
-      </div></div>
-      <div class="card"><div class="body">
-        <span class="eyebrow">Vehicle identification</span>
-        <h3>Every entry receives</h3>
-        <ul class="tags">{% for s in site.data.vehicles.identification %}<li>{{ s }}</li>{% endfor %}</ul>
-      </div></div>
-    </div>
-    <div class="grid g3" style="margin-top:22px">
-      <div class="photo wide">{% include img.html key="gear_windshield" alt="Official Montaire Rally windshield banner" class="contain" %}</div>
-      <div class="photo wide">{% include img.html key="gear_roundel" alt="Personalized rally number roundel" class="contain" %}</div>
-      <div class="photo wide">{% include img.html key="gear_door_plate" alt="Driver door plate" class="contain" %}</div>
-    </div>
-    <div class="btn-row" style="margin-top:28px;justify-content:center"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register your car</a><a class="btn" href="{{ B }}/{{ A.poster_vehicles }}" target="_blank" rel="noopener">View the original vehicle guide</a></div>
-  </div>
-</section>
-
-<!-- SCHEDULE -->
-<section id="schedule" class="band-deep">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="kicker">Schedule</span>
-      <h2>The journey begins here</h2>
-      <p class="lede">Three extraordinary days of driving, camaraderie, and celebration across the most breathtaking roads in the Blue Ridge Mountains.</p>
-    </div>
-    <div class="timeline">
-      {% for d in site.data.schedule.days %}
-      <article class="tl-day">
-        <div class="tl-head">
-          <span class="d">{{ d.day }} · {{ d.weekday }}</span>
-          <h3>{{ d.date }} <small>{{ d.miles }}</small></h3>
-        </div>
-        <ul class="tl-items">
-          {% for i in d.items %}
-          <li><span class="t">{{ i.time }}</span><b>{{ i.title }}</b>{% if i.where != "" %}<span>{{ i.where }}</span>{% endif %}</li>
-          {% endfor %}
-        </ul>
-      </article>
-      {% endfor %}
-    </div>
-    <p class="center" style="margin-top:30px"><a href="{{ B }}/{{ A.poster_schedule }}" target="_blank" rel="noopener" style="display:inline-block;width:132px;border-radius:10px;overflow:hidden;border:1px solid var(--line)" title="Open the original schedule poster">{% include img.html thumb=true key="poster_schedule_sm" w=379 h=799 alt="Original schedule poster" %}</a></p>
-    <div class="split" style="margin-top:44px">
-      <div class="photo">{% include img.html key="lodging_aerial" w=1024 h=434 alt="Mountain lodge and village at sunset" %}</div>
-      <div>
-        <span class="kicker">Lodging</span>
-        <h3 style="font-size:1.9rem">Three nights of luxury lodging</h3>
-        <p>Rest at partner lodges chosen for the same reason as the roads: they’re worth the trip. Add the Lodging Pass when you register and your rooms, meals, and exclusive experiences are handled in one checkout.</p>
-        <div class="btn-row"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Add lodging</a><a class="btn" href="{{ B }}/{{ A.poster_schedule }}" target="_blank" rel="noopener">Original schedule poster</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COIN QUEST -->
-<section id="coins" class="band-navy">
-  <div class="wrap split flip">
-    <div>
-      <div class="photo wide">
-        <video muted loop playsinline controls preload="none" poster="{{ B }}/{{ A.coin_poster }}" style="width:100%;aspect-ratio:16/10;object-fit:cover"><source src="{{ B }}/{{ A.coin_video_sm }}" type="video/mp4" media="(max-width: 700px)"><source src="{{ B }}/{{ A.coin_video }}" type="video/mp4"></video>
-      </div>
-      <div class="photo wide" style="margin-top:16px">{% include img.html key="gear_plaque" alt="Montaire Rally coin plaque" %}</div>
-    </div>
-    <div>
-      <span class="kicker">The Montaire Coin Quest™</span>
-      <h2>A journey you can hold in your hand</h2>
-      <p>Twelve exclusive challenge coins at iconic locations throughout the Blue Ridge Mountains. Each coin commemorates a memorable destination, legendary roadway, or defining moment along the route.</p>
-      <ol class="coins">
-        {% for c in site.data.coins %}<li><b>{{ c.n }}</b>{{ c.name }}{% if c.note %}<small>{{ c.note }}</small>{% endif %}</li>{% endfor %}
-      </ol>
-      <p>Complete all twelve to earn the Coin Quest Finisher Award. <em style="color:var(--copper-hi)">Collect the journey. Earn the distinction. Remember the drive.</em></p>
-      <div class="btn-row"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Add the Coin Quest</a><a class="btn" href="{{ B }}/{{ A.poster_coinquest }}" target="_blank" rel="noopener">Original poster</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- PASSES -->
-<section id="passes" class="band-cream">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="kicker">Tickets &amp; registration</span>
-      <h2>Choose your pass</h2>
-      <p class="lede">One checkout for the whole rally.</p>
-      <span class="demo-note">Demo pricing — real prices are set in Stride</span>
+      <span class="kicker">Explore the rally</span>
+      <h2>Everything you need for April</h2>
     </div>
     <div class="grid g3">
-      {% for p in site.data.passes.passes %}
-      <article class="pass-card{% if p.featured %} featured{% endif %}">
-        {% if p.featured %}<span class="flag">Most popular</span>{% endif %}
-        <div class="art">{% include img.html thumb=true key=p.image alt=p.name %}</div>
+      {% for e in site.data.explore %}
+      <a class="card" href="{{ e.url | relative_url }}">
+        <div class="media">{% include img.html thumb=true key=e.image alt="" %}</div>
         <div class="body">
-          <h3>{{ p.name }}</h3>
-          <div class="tag">{{ p.tagline }}</div>
-          <ul>{% for x in p.includes %}<li>{{ x }}</li>{% endfor %}</ul>
-          <div class="price">{% include price.html n=p.price %} <small>{{ p.per }}</small></div>
+          <span class="eyebrow">{{ e.kicker }}</span>
+          <h3>{{ e.title }}</h3>
+          <p>{{ e.blurb }}</p>
         </div>
-      </article>
+      </a>
       {% endfor %}
     </div>
-    <p class="center" style="margin-top:34px"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Start registration</a></p>
-    <ol class="steps" style="color:var(--cream-ink)">
-      <li style="background:#fff;border-color:rgba(27,37,54,.12)"><b>Pick your pass</b><span style="color:#46526a">Entry, single day, lodging, meals, apparel, and the Coin Quest.</span></li>
-      <li style="background:#fff;border-color:rgba(27,37,54,.12)"><b>Tell us about the car</b><span style="color:#46526a">Class, make, model, and year — the info the rally needs for your banner and number.</span></li>
-      <li style="background:#fff;border-color:rgba(27,37,54,.12)"><b>Sign the waiver</b><span style="color:#46526a">Collected at checkout, so nobody shows up to the driver’s meeting without one.</span></li>
-      <li style="background:#fff;border-color:rgba(27,37,54,.12)"><b>Pay securely</b><span style="color:#46526a">Promo codes and digital gift certificates supported. Confirmation arrives instantly.</span></li>
-    </ol>
   </div>
 </section>
 
-<!-- GEAR -->
-<section id="gear" class="band-navy">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="kicker">Official gear</span>
-      <h2>Look the part</h2>
-      <p>Everything on the car and in the cabin — plus the official store for hats, vests, and keepsakes.</p>
-    </div>
-    <div class="grid g3" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr))">
-      {% for g in site.data.gear.items %}
-      <div class="gear-item">
-        <div class="thumb">{% include img.html thumb=true key=g.image alt=g.name %}</div>
-        <b>{{ g.name }}</b><span>{{ g.note }}</span>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="split" style="margin-top:56px;align-items:start">
-      <div class="photo wide">{% include img.html key="pass_apparel" alt="Complete apparel package lanyard badge" class="contain" %}</div>
-      <div class="band-cream" style="padding:30px;border-radius:var(--radius)">
-        <h3>Shop the official store</h3>
-        <p>Hats, jackets, journals, and more — shipped from the existing Montaire Rally store.</p>
-        <ul class="store-list">
-          {% for s in site.data.gear.store %}<li><a href="{{ s.url }}">{{ s.name }}</a></li>{% endfor %}
-        </ul>
-        <div class="btn-row" style="margin-top:1.2rem"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Add the apparel package</a><a class="btn light" href="{{ site.store_url }}">Visit the store</a></div>
-      </div>
-    </div>
-  </div>
-</section>
+{% include partners.html %}
 
-<!-- ABOUT + PARTNERS -->
-<section id="about" class="band-deep">
-  <div class="wrap split">
-    <div class="photo tall">{% include img.html key="couple_beach" alt="The Montaire Rally hosts on a beach" %}</div>
-    <div>
-      <span class="kicker">About us</span>
-      <h2>Hosted by people who love the drive</h2>
-      <p>Montaire Rally was built by enthusiasts who wanted a rally with the pace of a great road trip and the polish of a concours — no stopwatches, just superb cars on superb roads, and a table full of friends at the end of every day.</p>
-      <p style="color:var(--muted);font-size:.9rem">Placeholder copy — swap in the organizers’ own story from the Decap admin.</p>
-      <div class="btn-row"><a class="btn" href="{{ site.facebook_url }}">Follow on Facebook</a></div>
-    </div>
-  </div>
-</section>
-
-<section class="band-cream" style="padding:64px 0">
-  <div class="wrap center">
-    <span class="kicker">Partners</span>
-    <div class="partners" style="margin-top:1.4rem">
-      {% for p in site.data.partners %}<span title="{{ p.name }}">{% include img.html thumb=true key=p.image alt=p.name %}</span>{% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq" class="band-navy">
-  <div class="narrow faq">
-    <div class="section-head" style="margin-bottom:1.5rem"><span class="kicker">Questions</span><h2>Good to know</h2></div>
-    {% for f in site.data.faq.faq %}
-    <details><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>
-    {% endfor %}
-    <div class="center" style="margin-top:46px"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register now</a></div>
+<section class="band-navy">
+  <div class="narrow center">
+    <span class="kicker">April 22–24, 2027</span>
+    <h2>Save your place on the road</h2>
+    <p>Entries are limited. Register your car, add lodging and the Coin Quest, and sign the waiver in one checkout.</p>
+    <div class="btn-row" style="justify-content:center"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register your car</a><a class="btn" href="{{ '/passes/' | relative_url }}">Compare passes</a></div>
   </div>
 </section>

@@ -1,0 +1,8 @@
+<section class="page-hero{% if include.img %} has-img{% endif %}">
+  {% if include.img %}{% include img.html key=include.img alt="" eager=true %}{% endif %}
+  <div class="wrap">
+    <span class="kicker">{{ include.kicker }}</span>
+    <h1>{{ include.title }}</h1>
+    {% if include.lede %}<p class="lede">{{ include.lede }}</p>{% endif %}
+  </div>
+</section>

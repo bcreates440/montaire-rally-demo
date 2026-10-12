@@ -1,0 +1,31 @@
+---
+layout: default
+title: FAQ
+description: Answers to common questions about Montaire Rally — vehicles, the route, registration, and gifts.
+---
+{% include page-hero.html img="man_firepit" kicker="Questions" title="Good to know" %}
+
+<section class="band-navy">
+  <div class="narrow faq">
+    {% for f in site.data.faq.faq %}
+    <details><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>
+    {% endfor %}
+    <div class="center" style="margin-top:46px"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register now</a></div>
+  </div>
+</section>
+
+{% assign A = site.data.assets %}
+{% assign B = site.asset_base | relative_url %}
+<section class="band-deep" aria-label="Rally photos">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:2rem"><span class="kicker">In pictures</span><h2>Scenes from the rally</h2></div>
+    <div class="carousel">
+      <button class="car-btn prev" aria-label="Previous photos">‹</button>
+      <div class="car-track">
+        {% for p in site.data.carousel %}<figure tabindex="0" role="button" aria-label="Enlarge: {{ p.alt }}" data-full="{{ B }}/{{ A[p.key] }}"><img src="{{ B }}/thumb/{{ A[p.key] }}" alt="{{ p.alt }}" loading="lazy"></figure>{% endfor %}
+      </div>
+      <button class="car-btn next" aria-label="Next photos">›</button>
+    </div>
+  </div>
+</section>
+<div class="lightbox" role="dialog" aria-label="Image viewer"><button aria-label="Close">×</button><img alt=""></div>

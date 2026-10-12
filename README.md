@@ -9,9 +9,12 @@ organizers edit content in a browser.
 https://bcreates440.github.io/montaire-rally-demo/ (demo; marked noindex).
 
 ## What's in the demo
-- **Home** – hero video, philosophy, route map + three day cards, the four vehicle
-  classes, schedule (April 22–24, 2027), lodging, Coin Quest, gear, partners, FAQ.
-- **/gallery/** – every image from the old site, filterable, with a lightbox.
+- **Home** – hero video, philosophy, "Explore the rally" cards, partners.
+- **/schedule/** – day-by-day schedule and lodging, then the route (`#route`) and the
+  vehicle classes (`#vehicles`). The nav's Schedule dropdown links to those anchors.
+- **/coin-quest/**, **/passes/**, **/gear/**, **/about/**
+- **/faq/** – questions plus a photo carousel (`_data/carousel.yml`) with a lightbox.
+- Menu: `_data/nav.yml` (header + footer). Home cards: `_data/explore.yml`.
 - **/admin/** – Decap CMS for passes, schedule, FAQ, and the Stride link.
 - Every distinct image and all three videos from the old site are used (58 files after
   collapsing the duplicate sizes Canva generates; the three videos each get a desktop

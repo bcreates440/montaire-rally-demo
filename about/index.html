@@ -1,0 +1,23 @@
+---
+layout: default
+title: About Us
+description: Montaire Rally is hosted by enthusiasts who wanted a rally with the pace of a great road trip and the polish of a concours.
+---
+{% assign A = site.data.assets %}
+{% assign B = site.asset_base | relative_url %}
+{% include page-hero.html img="couple_beach_xl" kicker="About us" title="Hosted by people who love the drive" %}
+
+<section class="band-deep">
+  <div class="wrap split">
+    <div class="photo tall">{% include img.html key="couple_beach" alt="The Montaire Rally hosts on a beach" %}</div>
+    <div>
+      
+      <h2>Our story</h2>
+      <p>Montaire Rally was built by enthusiasts who wanted a rally with the pace of a great road trip and the polish of a concours — no stopwatches, just superb cars on superb roads, and a table full of friends at the end of every day.</p>
+      <p style="color:var(--muted);font-size:.9rem">Placeholder copy — swap in the organizers’ own story from the Decap admin.</p>
+      <div class="btn-row"><a class="btn" href="{{ site.facebook_url }}">Follow on Facebook</a></div>
+    </div>
+  </div>
+</section>
+
+{% include partners.html %}

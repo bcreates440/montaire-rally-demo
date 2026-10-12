@@ -4,13 +4,9 @@
     <a class="brand" href="{{ site.baseurl }}/"><img src="{{ site.asset_base | relative_url }}/{{ site.data.assets.logo }}" alt="" width="46" height="46"><span>Montaire Rally</span></a>
     <button class="menu-btn" aria-label="Menu" aria-expanded="false" data-menu>☰</button>
     <nav class="nav" id="nav">
-      <a href="{{ site.baseurl }}/#experience">Experience</a>
-      <a href="{{ site.baseurl }}/#route">Route</a>
-      <a href="{{ site.baseurl }}/#vehicles">Vehicles</a>
-      <a href="{{ site.baseurl }}/#schedule">Schedule</a>
-      <a href="{{ site.baseurl }}/#coins">Coin Quest</a>
-      <a href="{{ site.baseurl }}/#gear">Gear</a>
-      <a href="{{ site.baseurl }}/gallery/">Gallery</a>
+      {% for n in site.data.nav %}{% capture link %}<a href="{{ n.url | relative_url }}"{% if page.url == n.url %} aria-current="page"{% endif %}>{{ n.title }}</a>{% endcapture %}
+      {% if n.children %}<div class="dropdown">{{ link }}<div class="dropdown-menu">{% for c in n.children %}<a href="{{ c.url | relative_url }}">{{ c.title }}</a>{% endfor %}</div></div>
+      {% else %}{{ link }}{% endif %}{% endfor %}
       <a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Register</a>
     </nav>
   </div>

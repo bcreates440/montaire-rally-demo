@@ -1,0 +1,11 @@
+# Main menu — used by the header and footer. "children" show as a hover dropdown.
+- title: Schedule
+  url: /schedule/
+  children:
+    - { title: Schedule, url: /schedule/ }
+    - { title: Route,    url: /schedule/#route }
+    - { title: Vehicles, url: /schedule/#vehicles }
+- { title: Coin Quest, url: /coin-quest/ }
+- { title: Passes,     url: /passes/ }
+- { title: Gear,       url: /gear/ }
+- { title: FAQ,        url: /faq/ }

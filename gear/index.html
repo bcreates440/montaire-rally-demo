@@ -1,0 +1,32 @@
+---
+layout: default
+title: Official Gear
+description: Windshield banners, roundels, door plates, apparel, and the official Montaire Rally store.
+---
+{% assign A = site.data.assets %}
+{% assign B = site.asset_base | relative_url %}
+{% include page-hero.html img="man_tumbler" kicker="Official gear" title="Look the part" lede="Everything on the car and in the cabin — plus the official store." %}
+
+<section class="band-navy">
+  <div class="wrap">
+    <div class="grid g3" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr))">
+      {% for g in site.data.gear.items %}
+      <div class="gear-item">
+        <div class="thumb">{% include img.html thumb=true key=g.image alt=g.name %}</div>
+        <b>{{ g.name }}</b><span>{{ g.note }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="split" style="margin-top:56px;align-items:start">
+      <div class="photo wide">{% include img.html key="pass_apparel" alt="Complete apparel package lanyard badge" class="contain" %}</div>
+      <div class="band-cream" style="padding:30px;border-radius:var(--radius)">
+        <h3>Shop the official store</h3>
+        <p>Hats, jackets, journals, and more — shipped from the existing Montaire Rally store.</p>
+        <ul class="store-list">
+          {% for s in site.data.gear.store %}<li><a href="{{ s.url }}">{{ s.name }}</a></li>{% endfor %}
+        </ul>
+        <div class="btn-row" style="margin-top:1.2rem"><a class="btn primary" href="{{ site.stride_event_url }}" target="_blank" rel="noopener">Add the apparel package</a><a class="btn light" href="{{ site.store_url }}">Visit the store</a></div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -25,7 +25,7 @@ coin_video_sm:   video/857a1f0479564289d2074ed28b2c13b7.mp4
 coin_poster:     video/c37282fe6976a4f650ef229fa7b6f91f.jpg
 strip_3:         video/f953227d163ee83486adb0b0bd89b4db.jpg
 
-# --- Original posters (kept as "view the original" links + gallery) ---------
+# --- Original posters (shown in the FAQ carousel) ---------
 poster_schedule:   media/d7804b3aa12f57786208444de255893d.jpg
 poster_vehicles:   media/2ecc000b30416634943567dad7999277.jpg
 poster_coinquest:  media/481f9a1dfe361ae4795ded870b2a6aa6.jpg
