@@ -15,3 +15,6 @@ vendor/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Wrangler local dev cache
+.wrangler/

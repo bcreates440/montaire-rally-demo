@@ -2,11 +2,12 @@
 
 A Jekyll + Decap CMS rebuild of montairerally.com (currently a Canva site), with
 registration and ticketing handled by Stride Events. Built on the same "Jones
-Uncommon" approach as the WWCA site: free hosting on GitHub Pages, no plugins,
+Uncommon" approach: free hosting on Cloudflare (Workers static assets, built
+from this repo on every push), no plugins,
 organizers edit content in a browser.
 
 ## Look at it now
-https://bcreates440.github.io/montaire-rally-demo/ (demo; marked noindex).
+https://montaire-rally-demo.bcreates440.workers.dev/ (demo; marked noindex).
 
 ## What's in the demo
 - **Home** – hero video, philosophy, "Explore the rally" cards, partners.
@@ -27,10 +28,13 @@ https://bcreates440.github.io/montaire-rally-demo/ (demo; marked noindex).
    page now; swap in the registration page URL when it exists).
 2. Replace the placeholder prices in `_data/passes.yml` (shown on the home page
    pass cards; Stride is the source of truth).
-3. In `_config.yml` set `url:` to his domain and `baseurl: ""`, and remove the
+3. In `_config.yml` set `url:` to his domain, and remove the
    `noindex` meta tag from `_layouts/default.html`.
-4. Push to a new GitHub repo, enable Pages, and fill in `admin/config.yml`
-   (repo + OAuth worker URL from `client-sites-auth`).
+4. Push to a new GitHub repo, import it in Cloudflare (Workers & Pages → Create →
+   Import a repository; build command `bundle install && bundle exec jekyll build`;
+   set `name` in `wrangler.toml`), and fill in `admin/config.yml` (repo + OAuth
+   worker URL). Add the site's address to that worker's `ALLOWED_ORIGINS`.
+   Don't enable GitHub Pages.
 5. Confirm the route stops, lodging, and the "About us" copy with the organizer.
 
 ## Run locally
