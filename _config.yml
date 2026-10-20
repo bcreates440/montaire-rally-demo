@@ -2,9 +2,13 @@
 title: Montaire Rally
 tagline: The premier grand touring experience of the Blue Ridge Mountains
 description: Three days. 550+ miles of asphalt. 15 stages. April 22–24, 2027 in Western North Carolina.
-# Demo address on Cloudflare. At launch: set url to his domain.
+# Demo address. Served from TWO places while the prospect has the old link:
+#   GitHub Pages: bcreates440.github.io/montaire-rally-demo/ (uses this baseurl)
+#   Cloudflare:   montaire-rally-demo.bcreates440.workers.dev (its build passes
+#                 --baseurl "" to override it - see wrangler.toml)
+# At launch: set url to his domain, baseurl to "", and drop the override.
 url: "https://montaire-rally-demo.bcreates440.workers.dev"
-baseurl: ""
+baseurl: "/montaire-rally-demo"
 
 # --- Images & video ---------------------------------------------------------
 # Every image/video from the old Canva site, resized and stored in the repo.
