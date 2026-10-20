@@ -5,6 +5,8 @@
 #
 # BUILD COMMAND (set in the Cloudflare dashboard, not here):
 #   bundle install && bundle exec jekyll build --baseurl ""
+# plus build variables LANG and LC_ALL = C.UTF-8 (Settings > Build), or Sass
+# fails on an "Invalid US-ASCII character" error.
 # The --baseurl "" matters: _config.yml keeps "/montaire-rally-demo" so the
 # GitHub Pages copy (the link already sent to the prospect) keeps working,
 # while this copy is served from the root. Without it every link here 404s. Jones Uncommon sites are hosted on Cloudflare, not GitHub

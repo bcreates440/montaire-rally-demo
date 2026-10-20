@@ -37,7 +37,8 @@ Cloudflare's build command overrides it with `--baseurl ""`
    `--baseurl ""` from the Cloudflare build command), and remove the
    `noindex` meta tag from `_layouts/default.html`.
 4. Push to a new GitHub repo, import it in Cloudflare (Workers & Pages → Create →
-   Import a repository; build command `bundle install && bundle exec jekyll build`;
+   Import a repository; build command `bundle install && bundle exec jekyll build`; build variables
+   `LANG` and `LC_ALL` = `C.UTF-8`;
    set `name` in `wrangler.toml`), and fill in `admin/config.yml` (repo + OAuth
    worker URL). Add the site's address to that worker's `ALLOWED_ORIGINS`.
    Don't enable GitHub Pages.
