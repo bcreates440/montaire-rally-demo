@@ -81,18 +81,22 @@ export class Conflict extends Error {
  * uploads: { path: Blob }
  * base:    the commit the editor loaded
  * overwrite: true to replace files that were also changed elsewhere
- * Returns the new commit's sha.
+ * Returns { sha, theirs }: the new commit, and the files changed elsewhere
+ * that this publish was combined with. The editor must reload those -
+ * otherwise its copies are out of date, and the next publish would quietly
+ * put the old versions back.
  */
 export async function publish({ gh, repo, branch, base, changes, uploads, message, overwrite = false, onStep = () => {} }) {
   const ref = `/repos/${repo}/git/refs/heads/${encodeURIComponent(branch)}`;
+  const theirs = new Set();
   for (let attempt = 0; attempt < 3; attempt++) {
     onStep("Checking for changes made elsewhere…");
     const head = (await gh(ref)).object.sha;
-    if (head !== base && !overwrite) {
+    if (head !== base) {
       const cmp = await gh(`/repos/${repo}/compare/${base}...${head}`);
-      const theirs = new Set((cmp.files ?? []).map((f) => f.filename));
+      for (const f of cmp.files ?? []) theirs.add(f.filename);
       const both = changes.map(([p]) => p).filter((p) => theirs.has(p));
-      if (both.length) throw new Conflict(both, head);
+      if (both.length && !overwrite) throw new Conflict(both, head);
     }
     const headCommit = await gh(`/repos/${repo}/git/commits/${head}`);
 
@@ -114,7 +118,8 @@ export async function publish({ gh, repo, branch, base, changes, uploads, messag
     onStep("Publishing…");
     try {
       await gh(ref, { method: "PATCH", body: JSON.stringify({ sha: commit.sha, force: false }) });
-      return commit.sha;
+      const ours = new Set(changes.map(([p]) => p));
+      return { sha: commit.sha, theirs: [...theirs].filter((p) => !ours.has(p)) };
     } catch (err) {
       // Someone published in the last few seconds: start again on top of them.
       if (!/ 422 /.test(err.message)) throw err;

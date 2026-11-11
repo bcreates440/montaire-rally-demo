@@ -857,6 +857,11 @@ const closeBtn = (text = "Close") => el("button", { type: "button", className: "
 function startPublish() {
   const changes = changedFiles();
   if (!changes.length) return say("There's nothing new to publish.");
+  if (state.stale) {
+    return publishDialog(el("h2", { textContent: "Reload the editor first" }),
+      el("p", { textContent: "The website was changed somewhere else while you worked. Reload this page to pick up those changes - yours are saved on this computer and will come back." }),
+      el("div", { className: "modal-actions" }, closeBtn("OK")));
+  }
   const pages = changes.filter(([p, t]) => p.startsWith("_content/") && t != null)
     .map(([p]) => ({ path: p, title: fileLabel(p), data: dataOf(p) }));
   const problems = check(pages, state.pageFields, (t) => blockType(state.pageFields, t));
@@ -900,13 +905,34 @@ async function doPublish(overwrite) {
   const status = el("p", { textContent: "Starting…" });
   publishDialog(el("h2", { textContent: "Publishing…" }), el("div", { className: "spinner" }), status);
   try {
-    const sha = await publish({
+    const { sha, theirs } = await publish({
       gh, repo: state.repo, branch: state.branch, base: state.base, changes, uploads, overwrite,
       message: `Website editor: ${names.join(", ")}`,
       onStep: (s) => (status.textContent = s),
     });
     // What's on GitHub now is the new starting point.
     for (const [p, t] of changes) { if (t == null) state.original.delete(p); else state.original.set(p, t); }
+    // Bring in what was changed elsewhere, so it can't be overwritten later.
+    // (The publish itself has already succeeded by this point.)
+    try {
+      for (const p of theirs.filter((x) => WANTED.test(x))) {
+        try {
+          const f = await gh(`/repos/${state.repo}/contents/${p.split("/").map(encodeURIComponent).join("/")}?ref=${sha}`);
+          const text = fromBase64(f.content).replace(/\r\n/g, "\n");
+          state.original.set(p, text);
+          state.files.set(p, text);
+        } catch (err) {
+          if (!/ 404 /.test(err.message)) throw err;
+          state.original.delete(p); // deleted elsewhere
+          state.files.delete(p);
+        }
+        state.docs.delete(p);
+      }
+      if (theirs.length) { listPages(); if (!state.files.has(state.current)) state.current = state.pages[0].path; draw(); }
+    } catch (err) {
+      console.error(err);
+      state.stale = true; // the next publish must not trust these copies
+    }
     for (const p of Object.keys(uploads)) state.tree.add(p);
     state.base = sha;
     state.uploads = {};
@@ -945,6 +971,7 @@ async function afterPublish(sha) {
   const site = state.config.site_url;
   const viewLink = site ? el("a", { className: "btn-primary", href: site, target: "_blank", rel: "noopener", textContent: "View your website" }) : null;
   if (state.branch !== liveBranch()) {
+    say("Saved to the test copy.");
     return publishDialog(el("h2", { textContent: "Saved to the test copy" }),
       el("p", { textContent: `Your changes are saved to "${state.branch}". The live website hasn't changed.` }),
       el("div", { className: "modal-actions" }, closeBtn("Done")));
