@@ -23,9 +23,10 @@ backend:
   name: github
   repo: bcreates440/montaire-rally-demo
   branch: main
-  # TODO: this site's own sign-in worker - see ops/templates/onboarding.md,
-  # "CMS Auth Setup".
-  base_url: https://montaire-cms-auth.bcreates440.workers.dev
+  # The shared sign-in worker (it already allows bcreates440.github.io). At
+  # launch on the organizer's own domain: give this site its own worker - see
+  # ops/templates/onboarding.md, "CMS Auth Setup" - and put its URL here.
+  base_url: https://client-sites-auth.bcreates440.workers.dev
   auth_endpoint: auth
   commit_messages:
     create: 'Add {{collection}} "{{slug}}"'
