@@ -31,7 +31,6 @@ body { background: var(--bg); display: flex; flex-direction: column; }
   flex-wrap: wrap;
 }
 .bar-left, .bar-right { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
-.site-name { font-weight: 600; }
 .field-inline { display: flex; align-items: center; gap: .5rem; color: var(--muted); }
 select, button, .btn-quiet { font: inherit; min-height: 44px; }
 select { padding: 0 .75rem; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--ink); }
@@ -181,3 +180,6 @@ a.btn-primary { display: inline-flex; align-items: center; min-height: 44px; tex
   background: var(--ink); color: #fff; padding: .5rem 1rem; border-radius: 999px;
 }
 .status:empty { display: none; }
+
+/* Read out by screen readers, not shown. */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

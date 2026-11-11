@@ -23,7 +23,7 @@ const { markedRender, probeImages, valuePaths } = await import(`./fields.js${V}`
 const { mapDom, mapImages, escapeText, htmlToText, cleanHtml } = await import(`./dom.js${V}`);
 const { drawForm, field, fieldAt, blockType } = await import(`./panel.js${V}`);
 const { shrink, fileName, loadUploads, saveUploads } = await import(`./media.js${V}`);
-const { check, publish, Conflict } = await import(`./publish.js${V}`);
+const { check, publish, Conflict, updateSitemap } = await import(`./publish.js${V}`);
 
 const $ = (id) => document.getElementById(id);
 const SITE_ROOT = new URL("../", location.href).href;
@@ -155,7 +155,7 @@ const fromBase64 = (b64) =>
 
 // Everything the renderer and editor read. Pictures aren't downloaded: the
 // preview loads them from the live site.
-const WANTED = /^(_layouts|_includes|_data|_content)\/.+\.(html|ya?ml)$|^_config\.yml$|^admin\/config\.yml$/;
+const WANTED = /^(_layouts|_includes|_data|_content)\/.+\.(html|ya?ml)$|^_config\.yml$|^admin\/config\.yml$|^sitemap\.xml$/;
 
 async function loadFiles() {
   const branch = await gh(`/repos/${state.repo}/branches/${encodeURIComponent(state.branch)}`);
@@ -898,10 +898,27 @@ function startPublish() {
   );
 }
 
+// Pages added, changed or deleted -> the site's sitemap.xml, if it has one.
+function sitemapUpdate() {
+  if (!state.files.has("sitemap.xml")) return null;
+  const pages = changedFiles().filter(([p]) => p.startsWith("_content/")).map(([p, t]) => {
+    const src = t ?? state.original.get(p) ?? "";
+    return {
+      permalink: (YAML.parse(src.match(FM)?.[1] ?? "") ?? {}).permalink,
+      kind: t == null ? "deleted" : state.original.has(p) ? "changed" : "added",
+    };
+  });
+  const siteUrl = (YAML.parse(state.files.get("_config.yml") ?? "") ?? {}).url;
+  return updateSitemap(state.files.get("sitemap.xml"), pages, siteUrl, new Date().toISOString().slice(0, 10));
+}
+
 async function doPublish(overwrite) {
+  const names = [...new Set(changedFiles().map(([p]) => fileLabel(p)))];
+  const sitemapBefore = state.files.get("sitemap.xml");
+  const sitemap = sitemapUpdate();
+  if (sitemap != null) state.files.set("sitemap.xml", sitemap);
   const changes = changedFiles();
   const uploads = usedUploads();
-  const names = [...new Set(changes.map(([p]) => fileLabel(p)))];
   const status = el("p", { textContent: "Starting…" });
   publishDialog(el("h2", { textContent: "Publishing…" }), el("div", { className: "spinner" }), status);
   try {
@@ -940,11 +957,13 @@ async function doPublish(overwrite) {
     changed();
     afterPublish(sha);
   } catch (err) {
+    // Not published: the sitemap goes back to how it was (it's redone next time).
+    if (sitemapBefore != null) state.files.set("sitemap.xml", sitemapBefore);
     if (err instanceof Conflict) {
       return publishDialog(
         el("h2", { textContent: "Someone else changed this too" }),
         el("p", { textContent: `While you were editing, these were also changed somewhere else: ${err.files.map(fileLabel).join(", ")}.` }),
-        el("p", { className: "hint", textContent: "Publishing yours replaces their version of those. Theirs isn't lost: it stays in Previous versions." }),
+        el("p", { className: "hint", textContent: "Publishing yours replaces their version of those. Theirs isn't lost: it stays in History." }),
         el("div", { className: "modal-actions" },
           el("button", { type: "button", className: "btn-primary", textContent: "Publish mine anyway", onclick: () => doPublish(true) }),
           closeBtn("Cancel")),
@@ -1065,7 +1084,9 @@ function openHelp(first = false) {
       el("li", {}, el("strong", { textContent: "Point at a section " }), "to move it, copy it, remove it, or add a new one below it."),
       el("li", {}, el("strong", { textContent: "Check the phone view " }), "with the Computer / Phone switch at the top."),
       el("li", {}, el("strong", { textContent: "Press Publish " }), "when you're happy. Until then your changes are saved on this computer only, and Undo takes back any step.")),
-    el("p", { className: "hint", textContent: "Changed something by mistake after publishing? Previous versions lets you look at and restore any earlier version of a page." }),
+    el("p", { className: "hint", textContent: "Changed something by mistake after publishing? History lets you look at and restore any earlier version of a page." }),
+    first ? null : el("p", { className: "hint" }, "Need a setting that isn't here? ",
+      el("a", { href: "../admin/", textContent: "Open the advanced editor" }), "."),
     el("div", { className: "modal-actions" }, closeBtn(first ? "Start editing" : "Close")),
   );
 }
@@ -1297,7 +1318,7 @@ async function start() {
   state.repo = state.config.backend.repo;
   // ?branch= lets Blake try the editor on a test branch.
   state.branch = new URLSearchParams(location.search).get("branch") || state.config.backend.branch || "main";
-  $("site-name").textContent = state.config.site_url ? new URL(state.config.site_url).hostname : "Your website";
+  if (state.config.site_url) document.title = `Edit ${new URL(state.config.site_url).hostname}`;
 
   $("page-select").onchange = (e) => {
     if (e.target.value === "__new") { e.target.value = state.current; openNewPage(); }

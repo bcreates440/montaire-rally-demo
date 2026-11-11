@@ -24,8 +24,8 @@ sitemap: false
 <a class="skip" href="#frame">Skip to the page</a>
 
 <header class="bar" id="bar" hidden>
+  <h1 class="sr-only">Website editor</h1>
   <div class="bar-left">
-    <span class="site-name" id="site-name">Your website</span>
     <label class="field-inline">
       <span>Page</span>
       <select id="page-select" aria-label="Page to edit"></select>
@@ -42,9 +42,8 @@ sitemap: false
       <button type="button" id="view-desktop" aria-pressed="true">Computer</button>
       <button type="button" id="view-mobile" aria-pressed="false">Phone</button>
     </div>
-    <button type="button" class="btn-quiet" id="history-btn">Previous versions</button>
+    <button type="button" class="btn-quiet" id="history-btn" title="Previous versions of this page">History</button>
     <button type="button" class="btn-quiet" id="help-btn">Help</button>
-    <a class="btn-quiet" href="../admin/">Advanced editor</a>
     <button type="button" class="btn-primary" id="publish-btn" disabled>Publish</button>
   </div>
 </header>
@@ -67,6 +66,7 @@ sitemap: false
     <p>Sign in to make changes. You'll use the same GitHub account as before.</p>
     <button type="button" class="btn-primary" id="signin">Sign in with GitHub</button>
     <p class="error" id="signin-error" role="alert"></p>
+    <p class="hint">Trouble signing in? <a href="../admin/">Sign in through the advanced editor</a>, then come back to this page - you'll be signed in here too.</p>
   </section>
 
   <section class="card-center" id="screen-loading">
