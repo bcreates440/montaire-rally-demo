@@ -2,11 +2,17 @@
 
 A Jekyll rebuild of montairerally.com (currently a Canva site), with
 registration and ticketing handled by Stride Events. Built on the same "Jones
-Uncommon" approach as the WWCA site: free hosting on GitHub Pages, no plugins,
+Uncommon" approach: free hosting on Cloudflare (Workers static assets, built
+from this repo on every push), no plugins,
 organizers edit content in a browser.
 
 ## Look at it now
-https://bcreates440.github.io/montaire-rally-demo/ (demo; marked noindex).
+https://montaire-rally-demo.bcreates440.workers.dev/ (demo; marked noindex).
+The original https://bcreates440.github.io/montaire-rally-demo/ stays up on
+purpose, since that's the link the prospect has. Both build from `main`: GitHub
+Pages uses `baseurl: "/montaire-rally-demo"` from `_config.yml`, and
+Cloudflare's build command overrides it with `--baseurl ""`
+(see `wrangler.toml`).
 
 ## What's in the demo
 - **Home** – hero video, philosophy, "Explore the rally" cards, partners.
@@ -30,10 +36,16 @@ https://bcreates440.github.io/montaire-rally-demo/ (demo; marked noindex).
    page now; swap in the registration page URL when it exists).
 2. Replace the placeholder prices in `_content/passes.html` (Stride is the source
    of truth).
-3. In `_config.yml` set `url:` to his domain and `baseurl: ""`, and remove the
+3. In `_config.yml` set `url:` to his domain and `baseurl: ""` (and drop the
+   `--baseurl ""` from the Cloudflare build command), and remove the
    `noindex` meta tag from `_layouts/default.html`.
-4. Set up this site's sign-in worker (`ops/templates/onboarding.md`, "CMS Auth
-   Setup") and put its URL in `admin/config.yml` (`backend.base_url`).
+4. Push to a new GitHub repo, import it in Cloudflare (Workers & Pages → Create →
+   Import a repository; build command `bundle install && bundle exec jekyll build`; build variables
+   `LANG` and `LC_ALL` = `C.UTF-8`;
+   set `name` in `wrangler.toml`). Give it its own sign-in worker
+   (`ops/templates/onboarding.md`, "CMS Auth Setup"), put that URL in
+   `admin/config.yml` (`backend.repo` and `backend.base_url`), and add the
+   site's address to the worker's `ALLOWED_ORIGINS`. Don't enable GitHub Pages.
 5. Confirm the route stops, lodging, and the "About us" copy with the organizer.
 
 ## Run locally

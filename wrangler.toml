@@ -1,0 +1,22 @@
+# Cloudflare hosting for this demo.
+#
+# The site is plain static files - this is NOT a server. Cloudflare's build
+# runs Jekyll on every push to main, then serves the finished _site folder.
+#
+# BUILD COMMAND (set in the Cloudflare dashboard, not here):
+#   bundle install && bundle exec jekyll build --baseurl ""
+# plus build variables LANG and LC_ALL = C.UTF-8 (Settings > Build), or Sass
+# fails on an "Invalid US-ASCII character" error.
+# The --baseurl "" matters: _config.yml keeps "/montaire-rally-demo" so the
+# GitHub Pages copy (the link already sent to the prospect) keeps working,
+# while this copy is served from the root. Without it every link here 404s. Jones Uncommon sites are hosted on Cloudflare, not GitHub
+# Pages, because Pages isn't allowed to be used as hosting for a paid
+# service (see the ops repo, design/hosting-decision.md).
+name = "montaire-rally-demo"
+compatibility_date = "2026-10-20"
+
+[assets]
+directory = "./_site"
+# Pages here are folders (/schedule/ -> schedule/index.html), which this
+# default serves as-is.
+html_handling = "auto-trailing-slash"

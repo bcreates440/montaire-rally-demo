@@ -1,9 +1,13 @@
-# Montaire Rally — demo rebuild (Jekyll, GitHub Pages compatible, no plugins)
+# Montaire Rally — demo rebuild (Jekyll, hosted on Cloudflare, no plugins)
 title: Montaire Rally
 tagline: The premier grand touring experience of the Blue Ridge Mountains
 description: Three days. 550+ miles of asphalt. 15 stages. April 22–24, 2027 in Western North Carolina.
-# Demo address on GitHub Pages. At launch: set url to his domain and baseurl to "".
-url: "https://bcreates440.github.io"
+# Demo address. Served from TWO places while the prospect has the old link:
+#   GitHub Pages: bcreates440.github.io/montaire-rally-demo/ (uses this baseurl)
+#   Cloudflare:   montaire-rally-demo.bcreates440.workers.dev (its build passes
+#                 --baseurl "" to override it - see wrangler.toml)
+# At launch: set url to his domain, baseurl to "", and drop the override.
+url: "https://montaire-rally-demo.bcreates440.workers.dev"
 baseurl: "/montaire-rally-demo"
 
 # --- Images & video ---------------------------------------------------------
@@ -26,7 +30,7 @@ event:
   region: Western North Carolina
   start: "2027-04-22"
 
-exclude: [Gemfile, README.md, HANDOFF.md, preview, vendor, node_modules, Gemfile.lock]
+exclude: [Gemfile, wrangler.toml, README.md, HANDOFF.md, preview, vendor, node_modules, Gemfile.lock]
 plugins: []
 
 # --- Pages ------------------------------------------------------------------
