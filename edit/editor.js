@@ -28,6 +28,9 @@ const { check, publish, Conflict, updateSitemap } = await import(`./publish.js${
 const $ = (id) => document.getElementById(id);
 const SITE_ROOT = new URL("../", location.href).href;
 const TOKEN_KEY = "site-editor.token";
+// Email sign-in (client-sites-auth/email). Its sessions start "ses." and its
+// GitHub calls go through it; GitHub sign-ins call GitHub directly.
+const EMAIL_SIGNIN = "https://client-sites-email.bcreates440.workers.dev";
 // Page settings a client should never need to touch (they break links).
 const HIDDEN_PAGE_FIELDS = new Set(["slug", "permalink", "layout", "blocks"]);
 
@@ -92,12 +95,17 @@ function storedToken() {
 // Same popup handshake Sveltia/Decap use, so each client's existing sign-in
 // worker works unchanged: the popup says "authorizing", we echo it back, and
 // it answers with the token.
-function signInPopup() {
+function githubSignInUrl() {
   const { base_url, auth_endpoint = "auth" } = state.config.backend;
   const url = new URL(auth_endpoint, base_url.replace(/\/?$/, "/"));
   url.searchParams.set("provider", "github");
   url.searchParams.set("site_id", location.hostname);
   url.searchParams.set("scope", "repo");
+  return url;
+}
+
+// The email sign-in (client-sites-auth/email) answers with the same messages.
+function signInPopup(url) {
   const popup = window.open(url, "site-editor-signin", "width=600,height=760");
   if (!popup) return Promise.reject(new Error("Your browser blocked the sign-in window. Allow pop-ups for this site and try again."));
   const workerOrigin = url.origin;
@@ -120,22 +128,25 @@ function signInPopup() {
 function askToSignIn(message = "") {
   show("screen-signin");
   $("signin-error").textContent = message;
-  $("signin").onclick = async () => {
+  $("signin-email").onclick = () => signIn(new URL(`${EMAIL_SIGNIN}/login`));
+  $("signin").onclick = () => signIn(githubSignInUrl());
+  async function signIn(url) {
     $("signin-error").textContent = "";
     try {
-      state.token = await signInPopup();
+      state.token = await signInPopup(url);
       try { localStorage.setItem(TOKEN_KEY, state.token); } catch {}
       await open();
     } catch (err) {
       $("signin-error").textContent = err.message;
     }
-  };
+  }
 }
 
 // ---------------------------------------------------------------- GitHub ---
 class SignedOut extends Error {}
 async function gh(path, opts = {}) {
-  const res = await fetch(`https://api.github.com${path}`, {
+  const api = state.token.startsWith("ses.") ? `${EMAIL_SIGNIN}/api` : "https://api.github.com";
+  const res = await fetch(`${api}${path}`, {
     ...opts,
     headers: {
       Accept: "application/vnd.github+json",
