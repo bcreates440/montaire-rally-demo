@@ -28,3 +28,14 @@ event:
 
 exclude: [Gemfile, README.md, HANDOFF.md, preview, vendor, node_modules, Gemfile.lock]
 plugins: []
+
+# --- Pages ------------------------------------------------------------------
+# Every page lives in _content/ as a list of sections (see _layouts/page.html),
+# which is what lets the website editor change them. Each file states its own
+# permalink, so addresses are unchanged (/, /about/, /passes/ ...).
+collections:
+  content:
+    output: true
+defaults:
+  - scope: { path: "", type: "content" }
+    values: { layout: "page" }

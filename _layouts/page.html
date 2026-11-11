@@ -1,0 +1,31 @@
+---
+layout: default
+---
+{%- comment -%}
+  A page built from a list of sections ("blocks") set at the top of its file in
+  _content/. Each block names its type; the matching file in _includes/blocks/
+  decides how it looks. New kind of section = new file there + one line here +
+  its fields in admin/config.yml.
+{%- endcomment -%}
+{%- for b in page.blocks %}
+{%- case b.type %}
+{%- when 'hero_video' %}{% include blocks/hero_video.html b=b %}
+{%- when 'page_hero' %}{% include blocks/page_hero.html b=b %}
+{%- when 'philosophy' %}{% include blocks/philosophy.html b=b %}
+{%- when 'story' %}{% include blocks/story.html b=b %}
+{%- when 'faces' %}{% include blocks/faces.html b=b %}
+{%- when 'explore' %}{% include blocks/explore.html b=b %}
+{%- when 'partners' %}{% include blocks/partners.html b=b %}
+{%- when 'cta' %}{% include blocks/cta.html b=b %}
+{%- when 'passes' %}{% include blocks/passes.html b=b %}
+{%- when 'schedule' %}{% include blocks/schedule.html b=b %}
+{%- when 'route' %}{% include blocks/route.html b=b %}
+{%- when 'vehicles' %}{% include blocks/vehicles.html b=b %}
+{%- when 'coin_quest' %}{% include blocks/coin_quest.html b=b %}
+{%- when 'faq' %}{% include blocks/faq.html b=b %}
+{%- when 'carousel' %}{% include blocks/carousel.html b=b %}
+{%- when 'gear' %}{% include blocks/gear.html b=b %}
+{%- when 'raw' %}{{ b.html }}
+{%- else %}<!-- unknown block type "{{ b.type }}" - check the spelling against _includes/blocks/ -->
+{%- endcase %}
+{%- endfor %}

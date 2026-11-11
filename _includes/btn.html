@@ -1,0 +1,15 @@
+{%- comment -%}
+  One button. url can be a page on this site (/passes/), a full web address,
+  or one of these words, which always point at the current link:
+    register  the Stride registration page (opens in a new tab)
+    facebook  the Facebook page
+    store     the online store
+  style: primary (filled), light, or blank for an outline button.
+{%- endcomment -%}
+{%- assign u = include.b.url -%}
+{%- if u == 'register' -%}{%- assign href = site.stride_event_url -%}
+{%- elsif u == 'facebook' -%}{%- assign href = site.facebook_url -%}
+{%- elsif u == 'store' -%}{%- assign href = site.store_url -%}
+{%- elsif u contains ':' -%}{%- assign href = u -%}
+{%- else -%}{%- assign href = u | relative_url -%}{%- endif -%}
+<a class="btn{% if include.b.style %} {{ include.b.style }}{% endif %}" href="{{ href }}"{% if u == 'register' %} target="_blank" rel="noopener"{% endif %}>{{ include.b.label }}</a>

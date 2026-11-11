@@ -1,0 +1,27 @@
+{%- comment -%} The route: intro, map, one card per day, a note, the route video. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section id="route" class="band-cream">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">{{ b.kicker }}</span>
+      <h2>{{ b.heading }}</h2>
+      <p class="lede">{{ b.lede }}</p>
+      <p>{{ b.text }}</p>
+    </div>
+    <div class="route-map">{% include img.html key=b.map w=b.map_width h=b.map_height alt=b.map_alt %}</div>
+    <div class="grid g3" style="margin-top:26px">
+      {%- for d in b.days %}
+      <article class="day-card {{ d.color }}">
+        <h3>{{ d.label }}</h3>
+        <div class="mi">{{ d.miles }}</div>
+        <p>{{ d.stops }}</p>
+      </article>
+      {%- endfor %}
+    </div>
+    <p class="note center">{{ b.note }}</p>
+    <div class="route-video" style="margin-top:36px">
+      <video muted loop playsinline controls preload="none" poster="{% include asset.html key=b.poster %}"><source src="{% include asset.html key=b.video_sm %}" type="video/mp4" media="(max-width: 700px)"><source src="{% include asset.html key=b.video %}" type="video/mp4"></video>
+    </div>
+    <p class="center" style="margin-top:30px">{% include btns.html list=b.buttons %}</p>
+  </div>
+</section>

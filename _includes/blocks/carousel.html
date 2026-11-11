@@ -1,0 +1,15 @@
+{%- comment -%} A sliding row of photos; click one to see it large. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section class="band-deep" aria-label="{{ b.label }}">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:2rem"><span class="kicker">{{ b.kicker }}</span><h2>{{ b.heading }}</h2></div>
+    <div class="carousel">
+      <button class="car-btn prev" aria-label="Previous photos">‹</button>
+      <div class="car-track">
+        {% for p in b.photos %}<figure tabindex="0" role="button" aria-label="Enlarge: {{ p.alt }}" data-full="{% include asset.html key=p.image %}"><img src="{% include asset.html key=p.image thumb=true %}" alt="{{ p.alt }}" loading="lazy"></figure>{% endfor %}
+      </div>
+      <button class="car-btn next" aria-label="Next photos">›</button>
+    </div>
+  </div>
+</section>
+<div class="lightbox" role="dialog" aria-label="Image viewer"><button aria-label="Close">×</button><img alt=""></div>

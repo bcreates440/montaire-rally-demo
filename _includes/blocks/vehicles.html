@@ -1,0 +1,40 @@
+{%- comment -%} Vehicle classes, two lists (standards, identification), three photos. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section id="vehicles" class="band-navy">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">{{ b.kicker }}</span>
+      <h2>{{ b.heading }}</h2>
+      <p class="lede">{{ b.lede }}</p>
+      <p>{{ b.text }}</p>
+    </div>
+    <div class="grid g2">
+      {%- for c in b.classes %}
+      <article class="card">
+        <div class="media">{% include img.html key=c.image alt=c.name %}</div>
+        <div class="body">
+          <span class="eyebrow">{{ c.kicker }}</span>
+          <h3>{{ c.name }}</h3>
+          <p>{{ c.blurb }}</p>
+          <ul class="tags">{% for e in c.examples %}<li>{{ e }}</li>{% endfor %}</ul>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+    <div class="grid g2" style="margin-top:26px">
+      {%- for l in b.lists %}
+      <div class="card"><div class="body">
+        <span class="eyebrow">{{ l.kicker }}</span>
+        <h3>{{ l.heading }}</h3>
+        <ul class="tags">{% for s in l.items %}<li>{{ s }}</li>{% endfor %}</ul>
+      </div></div>
+      {%- endfor %}
+    </div>
+    <div class="grid g3" style="margin-top:22px">
+      {%- for p in b.photos %}
+      <div class="photo wide">{% include img.html key=p.image alt=p.alt class="contain" %}</div>
+      {%- endfor %}
+    </div>
+    <div class="btn-row" style="margin-top:28px;justify-content:center">{% include btns.html list=b.buttons %}</div>
+  </div>
+</section>

@@ -1,0 +1,6 @@
+{%- comment -%}
+  The web address of one image or video. key is either a name from
+  _data/assets.yml (the original site's files) or a path under assets/rally/
+  (anything uploaded in the website editor). thumb=true picks the small copy.
+{%- endcomment -%}
+{{ site.asset_base | relative_url }}/{% if include.thumb %}thumb/{% endif %}{{ site.data.assets[include.key] | default: include.key -}}

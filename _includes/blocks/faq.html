@@ -1,0 +1,10 @@
+{%- comment -%} Questions and answers that open on click. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section class="band-navy">
+  <div class="narrow faq">
+    {%- for f in b.questions %}
+    <details><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>
+    {%- endfor %}
+    <div class="center" style="margin-top:46px">{% include btns.html list=b.buttons %}</div>
+  </div>
+</section>

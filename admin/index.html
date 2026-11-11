@@ -1,6 +1,88 @@
+---
+permalink: /admin/index.html
+sitemap: false
+---
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Montaire Rally — Content Manager</title></head>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Edit this website</title>
+<link rel="icon" href="../assets/rally/media/741a3949110ade4c0b42c698d2a747e9.webp" type="image/webp">
+<style>
+  /* Shown only for the second or two before the editor loads.
+     Deliberately brand-INDEPENDENT greys: this page cannot load the site
+     stylesheet (its rules would leak into the editor UI), so hardcoding a
+     brand colour here is exactly how a stale colour survives a rebrand. */
+  body{margin:0;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;
+       color:#222;background:#f5f5f5}
+  .boot{max-width:30rem;margin:18vh auto;padding:0 1.25rem;text-align:center}
+  .boot img{width:72px;height:72px}
+  .boot h1{font-size:1.25rem;margin:1rem 0 .25rem}
+  .boot p{color:#555;margin:0}
+</style>
+</head>
 <body>
-<script src="https://unpkg.com/decap-cms@3.3.3/dist/decap-cms.js"></script>
-</body></html>
+
+<div class="boot" id="boot">
+  <img src="../assets/rally/media/741a3949110ade4c0b42c698d2a747e9.webp" alt="" width="72" height="72">
+  <h1>Opening the website editor</h1>
+  <p>One moment. If this message stays on screen, the editor could not start &mdash;
+     check your internet connection and reload the page.</p>
+</div>
+
+<script>
+  // ponytail: Sveltia validates extension/format pairs more strictly than
+  // Decap did and rejects extension:html + format:yaml-frontmatter outright
+  // (blocks the whole editor with a config-error screen), even though it
+  // parses identically to what Decap always did. Registering a genuine
+  // custom format (Sveltia's documented escape hatch, see
+  // https://sveltiacms.app/en/docs/api/file-formats) sidesteps that without
+  // renaming every _content/*.html file to .md. Verified this round-trips
+  // every real page in this template family (parse -> stringify -> parse
+  // gives back the same data).
+  window.CMS_MANUAL_INIT = true;
+</script>
+<!-- ponytail: pinned so a Sveltia release can't change every client's editor
+     overnight. Bump on purpose, then test a save round-trip. -->
+<script src="https://unpkg.com/@sveltia/cms@0.253.1/dist/sveltia-cms.js"></script>
+<script type="module">
+  import YAML from "https://unpkg.com/yaml@2.9.1/browser/index.js";
+
+  const FRONT_MATTER = /^---\n(?:(?<head>[\s\S]*?))\n---(?:\n(?<body>[\s\S]*))?$/s;
+
+  CMS.registerCustomFormat("html-frontmatter", "html", {
+    fromFile: (text) => {
+      const { head, body } = text.match(FRONT_MATTER)?.groups ?? {};
+      const data = head ? YAML.parse(head) ?? {} : {};
+      return body ? { ...data, body: body.replace(/^\n/, "") } : data;
+    },
+    toFile: (data) => {
+      const { body, ...rest } = data;
+      const head = YAML.stringify(rest, { lineWidth: 0 });
+      return body ? `---\n${head}---\n\n${body}` : `---\n${head}---\n`;
+    },
+  });
+
+  CMS.init();
+</script>
+<script>
+  // Hide the holding message once the editor has taken over the page.
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      var boot = document.getElementById("boot");
+      if (boot && document.querySelector("#nc-root, .css-nc-root")) boot.remove();
+    }, 1500);
+    // ponytail: fallback in case Sveltia's mount selector ever diverges from
+    // Decap's #nc-root convention it currently reuses; remove boot regardless
+    // after 6s so a selector mismatch doesn't strand the loading message.
+    setTimeout(function () {
+      var boot = document.getElementById("boot");
+      if (boot) boot.remove();
+    }, 6000);
+  });
+</script>
+
+</body>
+</html>

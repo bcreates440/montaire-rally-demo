@@ -1,0 +1,22 @@
+{%- comment -%} A grid of picture cards, each linking somewhere. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section class="band-deep">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">{{ b.kicker }}</span>
+      <h2>{{ b.heading }}</h2>
+    </div>
+    <div class="grid g3">
+      {%- for e in b.cards %}
+      <a class="card" href="{{ e.url | relative_url }}">
+        <div class="media">{% include img.html thumb=true key=e.image alt="" %}</div>
+        <div class="body">
+          <span class="eyebrow">{{ e.kicker }}</span>
+          <h3>{{ e.title }}</h3>
+          <p>{{ e.blurb }}</p>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

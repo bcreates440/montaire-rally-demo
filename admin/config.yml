@@ -1,69 +1,463 @@
-# Decap CMS — lets the rally organizers edit their own site (no code).
-# Connect to the shared OAuth worker from client-sites-auth before going live.
+# ===========================================================================
+#  WEBSITE EDITOR - settings
+#
+#  Describes every section type and every box in it. Two editors read this:
+#  the click-to-edit editor at /edit/ and the backup editor at /admin/
+#  (Sveltia).
+#
+#  ONE RULE: the backup editor rewrites a page from this list when it saves.
+#  A setting that's in a page but NOT listed here is THROWN AWAY on save. Add
+#  every new field here too.
+#
+#  Images: a name from _data/assets.yml (the original site's files) or a path
+#  under assets/rally/ such as media/new-photo.jpg. Thumbnails live under
+#  assets/rally/thumb/ with the same path. /edit/ makes both when you upload;
+#  the backup editor only makes the full-size one.
+#
+#  Not editable here on purpose: _config.yml (Stride link, Facebook, store,
+#  event dates). The backup editor would rewrite the whole file and lose the
+#  rest of it.
+# ===========================================================================
+
 backend:
   name: github
-  repo: OWNER/montaire-rally-site        # TODO: set after the repo is created
+  repo: bcreates440/montaire-rally-demo
   branch: main
-  base_url: https://YOUR-OAUTH-WORKER.example   # TODO: client-sites-auth worker URL
-media_folder: assets/rally
-public_folder: /assets/rally
+  # TODO: this site's own sign-in worker - see ops/templates/onboarding.md,
+  # "CMS Auth Setup".
+  base_url: https://montaire-cms-auth.bcreates440.workers.dev
+  auth_endpoint: auth
+  commit_messages:
+    create: 'Add {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Delete {{collection}} "{{slug}}"'
+    uploadMedia: 'Upload {{path}}'
+    deleteMedia: 'Delete {{path}}'
+
+media_folder: "assets/rally/media"
+public_folder: "media"
+
+site_url: https://bcreates440.github.io/montaire-rally-demo/
+display_url: https://bcreates440.github.io/montaire-rally-demo/
+logo_url: ../assets/rally/media/741a3949110ade4c0b42c698d2a747e9.webp
+
 collections:
-  - name: data
-    label: Rally content
-    files:
-      - name: passes
-        label: Passes & pricing
-        file: _data/passes.yml
-        fields:
-          - label: Passes
-            name: passes
-            widget: list
+
+  # =========================================================================
+  #  PAGES
+  # =========================================================================
+  - name: "pages"
+    label: "Pages"
+    label_singular: "Page"
+    folder: "_content"
+    extension: "html"
+    format: "html-frontmatter"
+    create: true
+    delete: false
+    slug: "{{fields.slug}}"
+    identifier_field: "title"
+    summary: "{{title}}"
+
+    fields:
+      - { label: "File name", name: "slug", widget: "string",
+          hint: "Short name with no spaces - about, faq. Changing it on an existing page breaks links to it." }
+      - { label: "Web address", name: "permalink", widget: "string",
+          hint: "Starts and ends with a slash - /about/. The home page is just /",
+          pattern: ['^/([a-z0-9-]+/)?$', "Must look like /about/"] }
+      - { label: "Browser tab title", name: "title", widget: "string",
+          hint: "Also the blue headline in Google results. Under 60 characters." }
+      - { label: "Search engine description", name: "description", widget: "text",
+          hint: "The grey summary under the headline in Google. Around 150-160 characters." }
+
+      - label: "Sections"
+        name: "blocks"
+        label_singular: "Section"
+        widget: "list"
+        collapsed: false
+        types:
+
+          # ------------------------------------------------- hero_video -----
+          - label: "Video banner (home page)"
+            name: "hero_video"
+            widget: "object"
+            summary: "Video banner - {{fields.heading}}"
             fields:
-              - { label: ID, name: id, widget: string }
-              - { label: Name, name: name, widget: string }
-              - { label: Tagline, name: tagline, widget: string }
-              - { label: Image (key from _data/assets.yml), name: image, widget: string }
-              - { label: Price (USD), name: price, widget: number }
-              - { label: Per, name: per, widget: string }
-              - { label: Most popular, name: featured, widget: boolean, required: false }
-              - { label: Includes, name: includes, widget: list }
-      - name: schedule
-        label: Schedule
-        file: _data/schedule.yml
-        fields:
-          - label: Days
-            name: days
-            widget: list
-            fields:
-              - { label: Day, name: day, widget: string }
-              - { label: Weekday, name: weekday, widget: string }
-              - { label: Date, name: date, widget: string }
-              - { label: Miles, name: miles, widget: string }
-              - label: Items
-                name: items
-                widget: list
+              - &kicker { label: "Small label above the heading", name: "kicker", widget: "string", required: false,
+                          hint: "[[dates]] and [[region]] fill in the rally dates and region." }
+              - { label: "Main heading", name: "heading", widget: "string",
+                  hint: "Wrap words in <em> and </em> to make them stand out." }
+              - { label: "Line under the heading", name: "sub", widget: "text", required: false }
+              - &buttons
+                label: "Buttons"
+                name: "buttons"
+                widget: "list"
+                required: false
+                collapsed: true
+                summary: "{{fields.label}}"
                 fields:
-                  - { label: Time, name: time, widget: string }
-                  - { label: Title, name: title, widget: string }
-                  - { label: Where, name: where, widget: string, required: false }
-      - name: faq
-        label: FAQ
-        file: _data/faq.yml
-        fields:
-          - label: Questions
-            name: faq
-            widget: list
+                  - { label: "Button text", name: "label", widget: "string" }
+                  - { label: "Goes to", name: "url", widget: "string",
+                      hint: "register (Stride registration), facebook, store, a page on this site like /passes/, or a full web address." }
+                  - label: "Style"
+                    name: "style"
+                    widget: "select"
+                    required: false
+                    options:
+                      - { label: "Filled", value: "primary" }
+                      - { label: "Light", value: "light" }
+                      - { label: "Outline", value: "" }
+              - label: "Big numbers"
+                name: "stats"
+                widget: "list"
+                required: false
+                summary: "{{fields.value}} {{fields.label}}"
+                fields:
+                  - { label: "Number", name: "value", widget: "string" }
+                  - { label: "Label", name: "label", widget: "string" }
+              - &video_poster { label: "Picture shown before the video plays", name: "poster", widget: "image" }
+              - &video { label: "Video", name: "video", widget: "file" }
+              - &video_sm { label: "Smaller video for phones", name: "video_sm", widget: "file" }
+
+          # ------------------------------------------------- page_hero -----
+          - label: "Photo banner (top of a page)"
+            name: "page_hero"
+            widget: "object"
+            summary: "Banner - {{fields.title}}"
             fields:
-              - { label: Question, name: q, widget: string }
-              - { label: Answer, name: a, widget: text }
-  - name: config
-    label: Site settings
+              - { label: "Background photo", name: "image", widget: "image", required: false }
+              - { label: "Small label above the heading", name: "kicker", widget: "string", required: false }
+              - { label: "Heading", name: "title", widget: "string" }
+              - { label: "Line under the heading", name: "lede", widget: "string", required: false }
+
+          # ------------------------------------------------ philosophy -----
+          - label: "Writing beside a tall photo"
+            name: "philosophy"
+            widget: "object"
+            summary: "Writing + photo - {{fields.heading}}"
+            fields:
+              - *kicker
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Opening line", name: "lede", widget: "string", required: false }
+              - &paragraphs
+                label: "Paragraphs"
+                name: "paragraphs"
+                widget: "list"
+                summary: "{{fields.text}}"
+                fields:
+                  - { label: "Text", name: "text", widget: "text" }
+                  - label: "Look"
+                    name: "style"
+                    widget: "select"
+                    required: false
+                    options:
+                      - { label: "Normal", value: "" }
+                      - { label: "Highlighted", value: "accent" }
+                      - { label: "Bold", value: "strong" }
+                      - { label: "Small grey note", value: "note" }
+              - *buttons
+              - &image { label: "Photo", name: "image", widget: "image" }
+              - &image_alt { label: "Photo description", name: "image_alt", widget: "string",
+                             hint: "Describe what is in the picture. Blind visitors hear this; Google reads it." }
+              - { label: "Caption under the photo", name: "caption", widget: "string", required: false }
+
+          # ----------------------------------------------------- story -----
+          - label: "Tall photo beside writing"
+            name: "story"
+            widget: "object"
+            summary: "Photo + writing - {{fields.heading}}"
+            fields:
+              - *image
+              - *image_alt
+              - { label: "Heading", name: "heading", widget: "string" }
+              - *paragraphs
+              - *buttons
+
+          # ----------------------------------------------------- faces -----
+          - label: "Strip of small photos"
+            name: "faces"
+            widget: "object"
+            summary: "Photo strip"
+            fields:
+              - { label: "Name for screen readers", name: "label", widget: "string", required: false }
+              - &photos
+                label: "Photos"
+                name: "photos"
+                widget: "list"
+                summary: "{{fields.alt}}"
+                fields:
+                  - *image
+                  - { label: "Photo description", name: "alt", widget: "string" }
+
+          # --------------------------------------------------- explore -----
+          - label: "Picture cards with links"
+            name: "explore"
+            widget: "object"
+            summary: "Cards - {{fields.heading}}"
+            fields:
+              - *kicker
+              - { label: "Heading", name: "heading", widget: "string" }
+              - label: "Cards"
+                name: "cards"
+                widget: "list"
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Small label", name: "kicker", widget: "string", required: false }
+                  - { label: "Text", name: "blurb", widget: "text" }
+                  - { label: "Goes to", name: "url", widget: "string", hint: "A page on this site, like /passes/" }
+                  - *image
+
+          # -------------------------------------------------- partners -----
+          - label: "Partner logos"
+            name: "partners"
+            widget: "object"
+            summary: "Partner logos"
+            fields: []
+
+          # ------------------------------------------------------- cta -----
+          - label: "Closing call to action"
+            name: "cta"
+            widget: "object"
+            summary: "Call to action - {{fields.heading}}"
+            fields:
+              - *kicker
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Text", name: "text", widget: "text", required: false }
+              - *buttons
+
+          # ---------------------------------------------------- passes -----
+          - label: "Passes and prices"
+            name: "passes"
+            widget: "object"
+            summary: "Passes"
+            fields:
+              - { label: "Note above the cards", name: "note", widget: "string", required: false }
+              - label: "Passes"
+                name: "passes"
+                widget: "list"
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Tagline", name: "tagline", widget: "string" }
+                  - *image
+                  - { label: "Price (USD)", name: "price", widget: "number", value_type: "int" }
+                  - { label: "Per", name: "per", widget: "string", hint: "per vehicle, per person..." }
+                  - { label: "Most popular", name: "featured", widget: "boolean", required: false }
+                  - { label: "What's included", name: "includes", widget: "list" }
+              - *buttons
+              - label: "Steps"
+                name: "steps"
+                widget: "list"
+                required: false
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: "Step", name: "title", widget: "string" }
+                  - { label: "Detail", name: "text", widget: "string" }
+
+          # -------------------------------------------------- schedule -----
+          - label: "Day-by-day schedule"
+            name: "schedule"
+            widget: "object"
+            summary: "Schedule"
+            fields:
+              - label: "Days"
+                name: "days"
+                widget: "list"
+                summary: "{{fields.day}} - {{fields.date}}"
+                fields:
+                  - { label: "Day", name: "day", widget: "string" }
+                  - { label: "Weekday", name: "weekday", widget: "string" }
+                  - { label: "Date", name: "date", widget: "string" }
+                  - { label: "Miles", name: "miles", widget: "string" }
+                  - label: "Items"
+                    name: "items"
+                    widget: "list"
+                    summary: "{{fields.time}} {{fields.title}}"
+                    fields:
+                      - { label: "Time", name: "time", widget: "string" }
+                      - { label: "What", name: "title", widget: "string" }
+                      - { label: "Where", name: "where", widget: "string", required: false }
+              - *image
+              - &image_width { label: "Photo width in pixels", name: "image_width", widget: "number", value_type: "int", required: false }
+              - &image_height { label: "Photo height in pixels", name: "image_height", widget: "number", value_type: "int", required: false }
+              - *image_alt
+              - *kicker
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Text", name: "text", widget: "text" }
+              - *buttons
+
+          # ----------------------------------------------------- route -----
+          - label: "Route and map"
+            name: "route"
+            widget: "object"
+            summary: "Route - {{fields.heading}}"
+            fields:
+              - *kicker
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Opening line", name: "lede", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Map", name: "map", widget: "image" }
+              - { label: "Map width in pixels", name: "map_width", widget: "number", value_type: "int", required: false }
+              - { label: "Map height in pixels", name: "map_height", widget: "number", value_type: "int", required: false }
+              - { label: "Map description", name: "map_alt", widget: "string" }
+              - label: "Days"
+                name: "days"
+                widget: "list"
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Miles", name: "miles", widget: "string" }
+                  - { label: "Colour", name: "color", widget: "select", options: ["copper", "green", "blue"] }
+                  - { label: "Stops", name: "stops", widget: "text" }
+              - { label: "Note", name: "note", widget: "text", required: false }
+              - *video_poster
+              - *video
+              - *video_sm
+              - *buttons
+
+          # -------------------------------------------------- vehicles -----
+          - label: "Vehicle classes"
+            name: "vehicles"
+            widget: "object"
+            summary: "Vehicles - {{fields.heading}}"
+            fields:
+              - *kicker
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Opening line", name: "lede", widget: "string", required: false }
+              - { label: "Text", name: "text", widget: "text" }
+              - label: "Classes"
+                name: "classes"
+                widget: "list"
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Small label", name: "kicker", widget: "string" }
+                  - *image
+                  - { label: "Text", name: "blurb", widget: "text" }
+                  - { label: "Example cars", name: "examples", widget: "list" }
+              - label: "Lists"
+                name: "lists"
+                widget: "list"
+                summary: "{{fields.heading}}"
+                fields:
+                  - { label: "Small label", name: "kicker", widget: "string" }
+                  - { label: "Heading", name: "heading", widget: "string" }
+                  - { label: "Items", name: "items", widget: "list" }
+              - *photos
+              - *buttons
+
+          # ------------------------------------------------ coin_quest -----
+          - label: "Coin Quest"
+            name: "coin_quest"
+            widget: "object"
+            summary: "Coin Quest"
+            fields:
+              - *video_poster
+              - *video
+              - *video_sm
+              - *image
+              - *image_alt
+              - { label: "Opening paragraph", name: "intro", widget: "text" }
+              - label: "Coins"
+                name: "coins"
+                widget: "list"
+                summary: "{{fields.name}}"
+                hint: "Numbered automatically, in this order."
+                fields:
+                  - { label: "Place", name: "name", widget: "string" }
+                  - { label: "Small note", name: "note", widget: "string", required: false }
+              - { label: "Closing sentence", name: "outro", widget: "text" }
+              - { label: "Highlighted tagline", name: "tagline", widget: "string", required: false }
+              - *buttons
+
+          # ------------------------------------------------------- faq -----
+          - label: "Questions and answers"
+            name: "faq"
+            widget: "object"
+            summary: "FAQ"
+            fields:
+              - label: "Questions"
+                name: "questions"
+                widget: "list"
+                summary: "{{fields.q}}"
+                fields:
+                  - { label: "Question", name: "q", widget: "string" }
+                  - { label: "Answer", name: "a", widget: "text" }
+              - *buttons
+
+          # -------------------------------------------------- carousel -----
+          - label: "Sliding photo gallery"
+            name: "carousel"
+            widget: "object"
+            summary: "Gallery - {{fields.heading}}"
+            fields:
+              - { label: "Name for screen readers", name: "label", widget: "string", required: false }
+              - *kicker
+              - { label: "Heading", name: "heading", widget: "string" }
+              - *photos
+
+          # ------------------------------------------------------ gear -----
+          - label: "Gear and store"
+            name: "gear"
+            widget: "object"
+            summary: "Gear"
+            fields:
+              - label: "Gear"
+                name: "items"
+                widget: "list"
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - *image
+                  - { label: "Note", name: "note", widget: "string" }
+              - *image
+              - *image_alt
+              - { label: "Store heading", name: "store_heading", widget: "string" }
+              - { label: "Store text", name: "store_text", widget: "text" }
+              - label: "Store links"
+                name: "store"
+                widget: "list"
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: "Product", name: "name", widget: "string" }
+                  - { label: "Web address", name: "url", widget: "string" }
+              - *buttons
+
+  # =========================================================================
+  #  SITE-WIDE LISTS
+  # =========================================================================
+  - name: "site"
+    label: "Site-wide"
     files:
-      - name: settings
-        label: Event link & dates
-        file: _config.yml
+      - name: "partners"
+        label: "Partner logos"
+        file: "_data/partners.yml"
         fields:
-          - { label: Stride event URL, name: stride_event_url, widget: string }
-          - { label: Button label, name: stride_button_label, widget: string }
-          - { label: Facebook URL, name: facebook_url, widget: string }
-          - { label: Store URL, name: store_url, widget: string }
+          - label: "Partners"
+            name: "partners"
+            widget: "list"
+            root: true
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - *image
+      - name: "nav"
+        label: "Menu"
+        file: "_data/nav.yml"
+        fields:
+          - label: "Menu"
+            name: "nav"
+            widget: "list"
+            root: true
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Text", name: "title", widget: "string" }
+              - { label: "Goes to", name: "url", widget: "string" }
+              - label: "Drop-down links"
+                name: "children"
+                widget: "list"
+                required: false
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: "Text", name: "title", widget: "string" }
+                  - { label: "Goes to", name: "url", widget: "string" }

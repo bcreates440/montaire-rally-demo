@@ -1,0 +1,10 @@
+{%- comment -%} A closing call to action. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section class="band-navy">
+  <div class="narrow center">
+    <span class="kicker">{% include t.html s=b.kicker %}</span>
+    <h2>{{ b.heading }}</h2>
+    <p>{{ b.text }}</p>
+    <div class="btn-row" style="justify-content:center">{% include btns.html list=b.buttons %}</div>
+  </div>
+</section>

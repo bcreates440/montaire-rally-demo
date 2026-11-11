@@ -1,0 +1,30 @@
+{%- comment -%} The day-by-day timeline, then the lodging photo and text. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section id="schedule-days" class="band-deep">
+  <div class="wrap">
+    <div class="timeline">
+      {%- for d in b.days %}
+      <article class="tl-day">
+        <div class="tl-head">
+          <span class="d">{{ d.day }} · {{ d.weekday }}</span>
+          <h3>{{ d.date }} <small>{{ d.miles }}</small></h3>
+        </div>
+        <ul class="tl-items">
+          {%- for i in d.items %}
+          <li><span class="t">{{ i.time }}</span><b>{{ i.title }}</b>{% if i.where and i.where != "" %}<span>{{ i.where }}</span>{% endif %}</li>
+          {%- endfor %}
+        </ul>
+      </article>
+      {%- endfor %}
+    </div>
+    <div class="split" style="margin-top:44px">
+      <div class="photo">{% include img.html key=b.image w=b.image_width h=b.image_height alt=b.image_alt %}</div>
+      <div>
+        <span class="kicker">{{ b.kicker }}</span>
+        <h3 style="font-size:1.9rem">{{ b.heading }}</h3>
+        <p>{{ b.text }}</p>
+        <div class="btn-row">{% include btns.html list=b.buttons %}</div>
+      </div>
+    </div>
+  </div>
+</section>

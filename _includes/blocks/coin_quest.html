@@ -1,0 +1,20 @@
+{%- comment -%} The Coin Quest: video and plaque photo, the coins (numbered automatically), a button. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section class="band-navy">
+  <div class="wrap split flip">
+    <div>
+      <div class="photo wide">
+        <video muted loop playsinline controls preload="none" poster="{% include asset.html key=b.poster %}" style="width:100%;aspect-ratio:16/10;object-fit:cover"><source src="{% include asset.html key=b.video_sm %}" type="video/mp4" media="(max-width: 700px)"><source src="{% include asset.html key=b.video %}" type="video/mp4"></video>
+      </div>
+      <div class="photo wide" style="margin-top:16px">{% include img.html key=b.image alt=b.image_alt %}</div>
+    </div>
+    <div>
+      <p>{{ b.intro }}</p>
+      <ol class="coins">
+        {% for c in b.coins %}<li><b>{{ forloop.index }}</b>{{ c.name }}{% if c.note %}<small>{{ c.note }}</small>{% endif %}</li>{% endfor %}
+      </ol>
+      <p>{{ b.outro }}{% if b.tagline %} <em style="color:var(--copper-hi)">{{ b.tagline }}</em>{% endif %}</p>
+      <div class="btn-row">{% include btns.html list=b.buttons %}</div>
+    </div>
+  </div>
+</section>

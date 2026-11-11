@@ -1,0 +1,14 @@
+{%- comment -%} Tall photo on the left, writing and buttons on the right. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section class="band-deep">
+  <div class="wrap split">
+    <div class="photo tall">{% include img.html key=b.image alt=b.image_alt %}</div>
+    <div>
+      <h2>{{ b.heading }}</h2>
+      {%- for p in b.paragraphs %}
+      <p{% if p.style == 'note' %} style="color:var(--muted);font-size:.9rem"{% elsif p.style %} class="{{ p.style }}"{% endif %}>{{ p.text }}</p>
+      {%- endfor %}
+      <div class="btn-row">{% include btns.html list=b.buttons %}</div>
+    </div>
+  </div>
+</section>

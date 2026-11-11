@@ -1,0 +1,29 @@
+{%- comment -%} Pass cards with prices, a registration button, and the numbered steps. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section class="band-cream">
+  <div class="wrap">
+    {%- if b.note %}
+    <div class="section-head" style="margin-bottom:2rem"><span class="demo-note">{{ b.note }}</span></div>
+    {%- endif %}
+    <div class="grid g3">
+      {%- for p in b.passes %}
+      <article class="pass-card{% if p.featured %} featured{% endif %}">
+        {% if p.featured %}<span class="flag">Most popular</span>{% endif %}
+        <div class="art">{% include img.html thumb=true key=p.image alt=p.name %}</div>
+        <div class="body">
+          <h3>{{ p.name }}</h3>
+          <div class="tag">{{ p.tagline }}</div>
+          <ul>{% for x in p.includes %}<li>{{ x }}</li>{% endfor %}</ul>
+          <div class="price">{% include price.html n=p.price %} <small>{{ p.per }}</small></div>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+    <p class="center" style="margin-top:34px">{% include btns.html list=b.buttons %}</p>
+    <ol class="steps" style="color:var(--cream-ink)">
+      {%- for s in b.steps %}
+      <li style="background:#fff;border-color:rgba(41,56,71,.12)"><b>{{ s.title }}</b><span style="color:#4a5868">{{ s.text }}</span></li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>

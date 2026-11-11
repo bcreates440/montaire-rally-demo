@@ -1,0 +1,5 @@
+{%- comment -%}
+  Fills in shortcuts so the rally dates and region are typed in one place
+  (event: in _config.yml):  [[dates]]  [[region]]
+{%- endcomment -%}
+{{ include.s | replace: '[[dates]]', site.event.dates | replace: '[[region]]', site.event.region -}}

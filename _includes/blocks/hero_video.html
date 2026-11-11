@@ -1,0 +1,19 @@
+{%- comment -%} Home page banner: looping video, headline, buttons and big numbers. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section class="hero" style="padding:0">
+  <video autoplay muted loop playsinline preload="metadata" poster="{% include asset.html key=b.poster %}">
+    <source src="{% include asset.html key=b.video_sm %}" type="video/mp4" media="(max-width: 700px)">
+    <source src="{% include asset.html key=b.video %}" type="video/mp4">
+  </video>
+  <div class="wrap hero-inner">
+    <span class="kicker">{% include t.html s=b.kicker %}</span>
+    <h1>{{ b.heading }}</h1>
+    <p class="sub">{{ b.sub }}</p>
+    <div class="btn-row">{% include btns.html list=b.buttons %}</div>
+    <div class="stats">
+      {%- for s in b.stats %}
+      <div><b>{{ s.value }}</b><span>{{ s.label }}</span></div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

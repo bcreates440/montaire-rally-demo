@@ -1,0 +1,3 @@
+{%- comment -%} The photo banner at the top of every inner page. {%- endcomment -%}
+{%- assign b = include.b -%}
+{% include page-hero.html img=b.image kicker=b.kicker title=b.title lede=b.lede %}

@@ -1,0 +1,20 @@
+{%- comment -%} Writing on the left (with the mountain rule), tall photo and caption on the right. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section class="band-navy">
+  <div class="wrap split">
+    <div class="manifesto">
+      <span class="kicker">{{ b.kicker }}</span>
+      <h2>{{ b.heading }}</h2>
+      <p class="lede">{{ b.lede }}</p>
+      <div class="rule">{% include mountain.html %}</div>
+      {%- for p in b.paragraphs %}
+      <p{% if p.style %} class="{{ p.style }}"{% endif %}>{{ p.text }}</p>
+      {%- endfor %}
+      <div class="btn-row">{% include btns.html list=b.buttons %}</div>
+    </div>
+    <div>
+      <div class="photo tall">{% include img.html key=b.image alt=b.image_alt %}</div>
+      <p class="cap">{{ b.caption }}</p>
+    </div>
+  </div>
+</section>

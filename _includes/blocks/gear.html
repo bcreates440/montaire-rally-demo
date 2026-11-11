@@ -1,0 +1,25 @@
+{%- comment -%} The gear grid, then the store box with links. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section class="band-navy">
+  <div class="wrap">
+    <div class="grid g3" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr))">
+      {%- for g in b.items %}
+      <div class="gear-item">
+        <div class="thumb">{% include img.html thumb=true key=g.image alt=g.name %}</div>
+        <b>{{ g.name }}</b><span>{{ g.note }}</span>
+      </div>
+      {%- endfor %}
+    </div>
+    <div class="split" style="margin-top:56px;align-items:start">
+      <div class="photo wide">{% include img.html key=b.image alt=b.image_alt class="contain" %}</div>
+      <div class="band-cream" style="padding:30px;border-radius:var(--radius)">
+        <h3>{{ b.store_heading }}</h3>
+        <p>{{ b.store_text }}</p>
+        <ul class="store-list">
+          {% for s in b.store %}<li><a href="{{ s.url }}">{{ s.name }}</a></li>{% endfor %}
+        </ul>
+        <div class="btn-row" style="margin-top:1.2rem">{% include btns.html list=b.buttons %}</div>
+      </div>
+    </div>
+  </div>
+</section>

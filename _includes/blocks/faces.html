@@ -1,0 +1,9 @@
+{%- comment -%} A strip of small photos. {%- endcomment -%}
+{%- assign b = include.b -%}
+<section style="padding:0 0 clamp(48px,7vw,90px);background:var(--navy-950)" aria-label="{{ b.label }}">
+  <div class="wrap faces">
+    {%- for p in b.photos %}
+    {% include img.html thumb=true key=p.image alt=p.alt %}
+    {%- endfor %}
+  </div>
+</section>
