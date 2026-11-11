@@ -1,0 +1,15 @@
+# Extras for the website editor at /edit/ that only this site needs.
+# (Everything else - repo, sign-in, sections, fields - is in admin/config.yml.)
+
+# Every picture also has a small copy for grids and tiles. The editor makes
+# it when a picture is uploaded: same path, under this folder.
+thumbnails:
+  folder: assets/rally/thumb
+  size: 640
+
+# The words a button's "Goes to" can be set to (see _includes/btn.html),
+# and how they read in the editor's list.
+links:
+  register: "Registration on Stride (opens a new tab)"
+  facebook: "The Facebook page"
+  store: "The online store"
